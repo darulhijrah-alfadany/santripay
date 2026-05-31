@@ -1,0 +1,292 @@
+
+<style>
+  :root { --accent: #1D9E75; --accent-light: #E1F5EE; --accent-dark: #085041; --warm: #EF9F27; --warm-light: #FAEEDA; --coral: #D85A30; --coral-light: #FAECE7; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
+  .hero { padding: 2rem 0 1.5rem; border-bottom: 0.5px solid var(--color-border-tertiary); margin-bottom: 1.5rem; }
+  .hero-tag { display: inline-block; background: var(--accent-light); color: var(--accent-dark); font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; }
+  .hero h1 { font-size: 22px; font-weight: 500; color: var(--color-text-primary); line-height: 1.3; margin-bottom: 8px; }
+  .hero p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; }
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+  .metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 14px; }
+  .metric-label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .metric-value { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
+  .metric-sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+  .section { margin-bottom: 1.75rem; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; padding-bottom: 8px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .section-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .icon-green { background: var(--accent-light); color: var(--accent-dark); }
+  .icon-amber { background: var(--warm-light); color: #633806; }
+  .icon-coral { background: var(--coral-light); color: #4A1B0C; }
+  .icon-blue { background: #E6F1FB; color: #042C53; }
+  .section-title { font-size: 16px; font-weight: 500; color: var(--color-text-primary); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 14px; }
+  .card-badge { font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 10px; display: inline-block; margin-bottom: 8px; }
+  .badge-green { background: var(--accent-light); color: var(--accent-dark); }
+  .badge-amber { background: var(--warm-light); color: #633806; }
+  .badge-coral { background: var(--coral-light); color: #712B13; }
+  .badge-blue { background: #E6F1FB; color: #185FA5; }
+  .badge-purple { background: #EEEDFE; color: #3C3489; }
+  .card h3 { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+  .card p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
+  .list-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .list-item:last-child { border-bottom: none; }
+  .list-num { width: 22px; height: 22px; border-radius: 50%; background: var(--accent-light); color: var(--accent-dark); font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .list-content h4 { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+  .list-content p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
+  .phase-row { display: grid; grid-template-columns: 80px 1fr; gap: 12px; padding: 10px 0; border-bottom: 0.5px solid var(--color-border-tertiary); align-items: start; }
+  .phase-row:last-child { border-bottom: none; }
+  .phase-tag { font-size: 11px; font-weight: 500; padding: 4px 8px; border-radius: 6px; text-align: center; }
+  .phase-1 { background: var(--accent-light); color: var(--accent-dark); }
+  .phase-2 { background: var(--warm-light); color: #633806; }
+  .phase-3 { background: #E6F1FB; color: #185FA5; }
+  .phase-content h4 { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; }
+  .phase-content p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
+  .revenue-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .revenue-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 14px; }
+  .revenue-card h4 { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 8px; }
+  .price-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; }
+  .price-label { font-size: 12px; color: var(--color-text-secondary); }
+  .price-val { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+  .cta { background: var(--accent-light); border-radius: var(--border-radius-lg); padding: 16px; display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; }
+  .cta-text h3 { font-size: 15px; font-weight: 500; color: var(--accent-dark); margin-bottom: 4px; }
+  .cta-text p { font-size: 13px; color: #0F6E56; }
+  .cta button { background: var(--accent); color: white; border: none; border-radius: var(--border-radius-md); padding: 8px 16px; font-size: 13px; font-weight: 500; cursor: pointer; }
+</style>
+
+<h2 class="sr-only">Rencana Bisnis Platform Les Online Anak – Sumatera Barat</h2>
+
+<div class="hero">
+  <div class="hero-tag">Rencana Bisnis 2025</div>
+  <h1>RantiauBelajar — Platform Les Online Anak<br>Sumatera Barat</h1>
+  <p>Platform les daring berbasis lokal yang menghubungkan anak-anak SD–SMP di Sumbar dengan guru berpengalaman, mengintegrasikan nilai budaya Minangkabau dalam pembelajaran.</p>
+</div>
+
+<div class="metrics">
+  <div class="metric">
+    <div class="metric-label">Target pasar</div>
+    <div class="metric-value">1.2 Jt+</div>
+    <div class="metric-sub">Anak usia sekolah Sumbar</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label">Harga mulai</div>
+    <div class="metric-value">Rp 80rb</div>
+    <div class="metric-sub">Per sesi 60 menit</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label">Target tahun 1</div>
+    <div class="metric-value">500 siswa</div>
+    <div class="metric-sub">Padang + Bukittinggi</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label">Break-even</div>
+    <div class="metric-value">Bulan 10</div>
+    <div class="metric-sub">Estimasi operasional</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon icon-green"><i class="ti ti-device-laptop" aria-hidden="true"></i></div>
+    <div class="section-title">Fitur platform utama</div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-badge badge-green">Inti</div>
+      <h3>Kelas video langsung</h3>
+      <p>Sesi 1-on-1 dan kelompok kecil (3–5 siswa) via video call terintegrasi dengan papan tulis digital.</p>
+    </div>
+    <div class="card">
+      <div class="card-badge badge-green">Inti</div>
+      <h3>Penjadwalan fleksibel</h3>
+      <p>Orang tua pilih jadwal sendiri. Pengingat otomatis via WhatsApp — saluran utama warga Sumbar.</p>
+    </div>
+    <div class="card">
+      <div class="card-badge badge-amber">Diferensiasi</div>
+      <h3>Konten lokal Minang</h3>
+      <p>Soal dan contoh menggunakan konteks budaya Minangkabau, peribahasa, dan cerita rakyat lokal.</p>
+    </div>
+    <div class="card">
+      <div class="card-badge badge-amber">Diferensiasi</div>
+      <h3>Laporan progres orang tua</h3>
+      <p>Dashboard sederhana untuk ayah/bunda memantau perkembangan anak setiap minggu.</p>
+    </div>
+    <div class="card">
+      <div class="card-badge badge-blue">Penunjang</div>
+      <h3>Rekaman sesi</h3>
+      <p>Sesi direkam otomatis. Siswa bisa review materi kapanpun, termasuk saat ujian mendekat.</p>
+    </div>
+    <div class="card">
+      <div class="card-badge badge-blue">Penunjang</div>
+      <h3>Tryout online</h3>
+      <p>Soal latihan dan simulasi ujian sekolah (USBN, PTS, PAS) sesuai kurikulum Sumbar.</p>
+    </div>
+    <div class="card">
+      <div class="card-badge badge-purple">Jangka panjang</div>
+      <h3>Komunitas belajar</h3>
+      <p>Forum tanya-jawab antar siswa dan grup belajar peer-to-peer yang difasilitasi guru.</p>
+    </div>
+    <div class="card">
+      <div class="card-badge badge-purple">Jangka panjang</div>
+      <h3>Gamifikasi & reward</h3>
+      <p>Poin, badge, dan leaderboard kelas untuk menjaga motivasi belajar anak.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon icon-amber"><i class="ti ti-users" aria-hidden="true"></i></div>
+    <div class="section-title">Cara rekrut guru pertama (0 → 20 guru)</div>
+  </div>
+  <div>
+    <div class="list-item">
+      <div class="list-num">1</div>
+      <div class="list-content">
+        <h4>Manfaatkan jaringan alumni FKIP Unand & UNP</h4>
+        <p>Hubungi langsung dosen karir di Universitas Andalas dan UNP Padang. Tawarkan ke mahasiswa semester akhir dan fresh graduate sebagai penghasilan tambahan fleksibel. Mereka butuh portofolio mengajar, kita butuh guru.</p>
+      </div>
+    </div>
+    <div class="list-item">
+      <div class="list-num">2</div>
+      <div class="list-content">
+        <h4>Program "Guru Mitra Founding" dengan insentif lebih tinggi</h4>
+        <p>Tawarkan bagi hasil 75% (vs standar 60%) dan gelar "Guru Pendiri" untuk 20 guru pertama. Mereka juga mendapat prioritas booking dan profil featured. Kelangkaan awal adalah aset rekrutmen.</p>
+      </div>
+    </div>
+    <div class="list-item">
+      <div class="list-num">3</div>
+      <div class="list-content">
+        <h4>Posting di grup Facebook guru Sumbar & komunitas Telegram</h4>
+        <p>Grup seperti "Guru SD Sumatra Barat" dan "Info Lowker Padang" punya puluhan ribu anggota aktif. Pesan: "Mengajar dari rumah, jadwal bebas, bayaran langsung tiap minggu."</p>
+      </div>
+    </div>
+    <div class="list-item">
+      <div class="list-num">4</div>
+      <div class="list-content">
+        <h4>Kolaborasi dengan sekolah swasta dan bimbel konvensional</h4>
+        <p>Banyak guru les konvensional ingin ekspansi digital tapi tidak tahu caranya. Tawarkan platform sebagai alat, bukan saingan. Mereka bawa murid lama, kita beri teknologi dan murid baru.</p>
+      </div>
+    </div>
+    <div class="list-item">
+      <div class="list-num">5</div>
+      <div class="list-content">
+        <h4>Seleksi ringan + onboarding 1 hari</h4>
+        <p>Demo mengajar 15 menit + tes materi dasar. Hindari proses panjang di awal — friksi tinggi membunuh rekrutmen. Setelah bergabung, berikan kit: panduan mengajar online, template lesson plan, dan checklist kualitas sesi.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon icon-coral"><i class="ti ti-speakerphone" aria-hidden="true"></i></div>
+    <div class="section-title">Strategi akuisisi siswa pertama</div>
+  </div>
+  <div>
+    <div class="list-item">
+      <div class="list-num">1</div>
+      <div class="list-content">
+        <h4>Sesi gratis "Coba Belajar" — senajata utama</h4>
+        <p>Tawarkan 1 sesi gratis tanpa kartu kredit. Sekali anak menikmati sesi dengan guru yang cocok, konversi ke berbayar sangat tinggi. Fokus bikin sesi pertama itu luar biasa.</p>
+      </div>
+    </div>
+    <div class="list-item">
+      <div class="list-num">2</div>
+      <div class="list-content">
+        <h4>WhatsApp marketing di grup orang tua sekolah</h4>
+        <p>Hampir semua SD/SMP di Padang punya grup WA kelas aktif. Minta satu orang tua champion untuk share pengalaman di grup. Testimoni dari sesama orang tua jauh lebih dipercaya dari iklan mana pun.</p>
+      </div>
+    </div>
+    <div class="list-item">
+      <div class="list-num">3</div>
+      <div class="list-content">
+        <h4>Program referral: "Ajak 1 teman, dapat 1 sesi gratis"</h4>
+        <p>Masyarakat Minang sangat komunal. Sistem "dari mulut ke mulut" berpotensi viral jika diberi insentif yang tepat. Berikan kredit sesi ke pengajak dan yang diajak.</p>
+      </div>
+    </div>
+    <div class="list-item">
+      <div class="list-num">4</div>
+      <div class="list-content">
+        <h4>Konten TikTok & Instagram untuk orang tua muda</h4>
+        <p>Buat konten: tips belajar anak, cara mendampingi PR, trik menghadapi ujian. Target orang tua 28–40 tahun di Padang, Bukittinggi, Payakumbuh. Budget iklan Rp 500rb/bulan cukup untuk mulai.</p>
+      </div>
+    </div>
+    <div class="list-item">
+      <div class="list-num">5</div>
+      <div class="list-content">
+        <h4>Kerjasama dengan toko ATK dan warnet lokal</h4>
+        <p>Titipkan brosur di toko alat tulis, warnet, dan fotokopi dekat sekolah. Berikan komisi kecil untuk setiap siswa yang mendaftar melalui mereka. Sentuhan offline tetap penting di Sumbar.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon icon-blue"><i class="ti ti-calendar" aria-hidden="true"></i></div>
+    <div class="section-title">Roadmap 12 bulan pertama</div>
+  </div>
+  <div>
+    <div class="phase-row">
+      <div class="phase-tag phase-1">Bulan 1–3</div>
+      <div class="phase-content">
+        <h4>Fondasi & validasi</h4>
+        <p>Bangun MVP (bisa pakai Zoom + WhatsApp + Google Sheet dulu), rekrut 10 guru founding, onboard 50 siswa beta dengan harga promosi. Validasi: apakah orang tua mau bayar dan guru mau bertahan?</p>
+      </div>
+    </div>
+    <div class="phase-row">
+      <div class="phase-tag phase-1">Bulan 4–6</div>
+      <div class="phase-content">
+        <h4>Pertumbuhan awal</h4>
+        <p>Luncurkan platform web/app sederhana, dorong hingga 200 siswa aktif, ekspansi ke 20 guru, aktifkan program referral. Fokus kota: Padang dan Bukittinggi.</p>
+      </div>
+    </div>
+    <div class="phase-row">
+      <div class="phase-tag phase-2">Bulan 7–9</div>
+      <div class="phase-content">
+        <h4>Ekspansi kabupaten</h4>
+        <p>Masuk Payakumbuh, Solok, dan Pariaman. Target 400 siswa, tambah fitur laporan progres orang tua dan tryout online. Mulai BEP tercapai.</p>
+      </div>
+    </div>
+    <div class="phase-row">
+      <div class="phase-tag phase-3">Bulan 10–12</div>
+      <div class="phase-content">
+        <h4>Profitabilitas & produk</h4>
+        <p>Target 500+ siswa aktif, 40 guru, mulai kembangkan fitur gamifikasi dan konten rekaman untuk passive revenue. Siapkan pitch untuk investor Sumbar atau program inkubator.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon icon-green"><i class="ti ti-coin" aria-hidden="true"></i></div>
+    <div class="section-title">Model pendapatan</div>
+  </div>
+  <div class="revenue-grid">
+    <div class="revenue-card">
+      <h4>Paket sesi (utama)</h4>
+      <div class="price-row"><span class="price-label">1 sesi / 60 menit</span><span class="price-val">Rp 80.000</span></div>
+      <div class="price-row"><span class="price-label">Paket 4 sesi</span><span class="price-val">Rp 280.000</span></div>
+      <div class="price-row"><span class="price-label">Paket 8 sesi</span><span class="price-val">Rp 520.000</span></div>
+      <div class="price-row"><span class="price-label">Kelas grup (5 siswa)</span><span class="price-val">Rp 45.000/siswa</span></div>
+    </div>
+    <div class="revenue-card">
+      <h4>Bagi hasil guru</h4>
+      <div class="price-row"><span class="price-label">Guru reguler</span><span class="price-val">60% ke guru</span></div>
+      <div class="price-row"><span class="price-label">Guru founding</span><span class="price-val">75% ke guru</span></div>
+      <div class="price-row"><span class="price-label">Platform ambil</span><span class="price-val">25–40%</span></div>
+      <div class="price-row"><span class="price-label">Tryout premium</span><span class="price-val">Rp 25.000/paket</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="cta">
+  <div class="cta-text">
+    <h3>Mulai dengan validasi, bukan aplikasi</h3>
+    <p>3 bulan pertama bisa jalan hanya dengan WhatsApp + Zoom. Bangun teknologi setelah ada 50 siswa bayar.</p>
+  </div>
+  <button onclick="sendPrompt('Bantu saya buat pitch deck untuk RantiauBelajar ke investor lokal Sumbar ↗')">Buat pitch deck ↗</button>
+</div>
