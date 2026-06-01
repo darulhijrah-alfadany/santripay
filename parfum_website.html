@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAISON SCENTARA — Parfum Premium Batam</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE;
+    --bone: #EDE7DC;
+    --dark: #1A1410;
+    --brown: #3D2B1F;
+    --gold: #B8945A;
+    --gold-light: #D4B483;
+    --text: #2C1F14;
+    --muted: #7A6555;
+    --white: #FDFAF7;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--text); font-family: var(--font-body); font-weight: 300; overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; background: var(--cream); border-bottom: 1px solid rgba(184,148,90,0.2); }
+  .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-family: var(--font-display); font-size: 22px; letter-spacing: 0.12em; color: var(--dark); font-weight: 400; text-decoration: none; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { background: var(--dark); color: var(--cream) !important; padding: 8px 18px; letter-spacing: 0.08em; }
+  .nav-cta:hover { background: var(--brown); color: var(--cream) !important; }
+
+  /* PAGE SECTIONS */
+  section { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem; }
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* HERO */
+  .hero-wrap { min-height: 100vh; display: flex; align-items: center; background: var(--cream); padding-top: 64px; max-width: 100%; }
+  .hero-inner { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .hero-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 12px; }
+  .hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(48px, 6vw, 80px); font-weight: 300; line-height: 1.1; color: var(--dark); margin-bottom: 1.5rem; }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-desc { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 2.5rem; max-width: 420px; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--dark); color: var(--cream); padding: 14px 32px; font-family: var(--font-body); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--brown); }
+  .btn-outline { background: transparent; color: var(--dark); padding: 14px 32px; font-family: var(--font-body); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--dark); cursor: pointer; transition: all 0.2s; }
+  .btn-outline:hover { background: var(--dark); color: var(--cream); }
+  .hero-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .hero-card { background: var(--bone); padding: 2rem 1.5rem; position: relative; }
+  .hero-card-num { font-family: var(--font-display); font-size: 48px; color: rgba(184,148,90,0.2); font-weight: 300; line-height: 1; margin-bottom: 8px; }
+  .hero-card-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .hero-card-val { font-family: var(--font-display); font-size: 22px; color: var(--dark); font-weight: 400; }
+  .hero-card:nth-child(2) { margin-top: 2rem; }
+  .hero-card:nth-child(3) { margin-top: -1rem; }
+
+  /* SECTION HEADERS */
+  .sec-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; gap: 12px; }
+  .sec-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+  .sec-title { font-family: var(--font-display); font-size: clamp(32px, 4vw, 52px); font-weight: 300; color: var(--dark); line-height: 1.15; margin-bottom: 1rem; }
+  .sec-title em { font-style: italic; color: var(--gold); }
+  .sec-sub { font-size: 14px; color: var(--muted); line-height: 1.8; max-width: 520px; }
+
+  /* PRODUCTS */
+  .product-filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 2rem 0; }
+  .filter-btn { padding: 8px 20px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; background: transparent; border: 1px solid rgba(184,148,90,0.3); color: var(--muted); cursor: pointer; transition: all 0.2s; font-family: var(--font-body); }
+  .filter-btn.active, .filter-btn:hover { background: var(--dark); color: var(--cream); border-color: var(--dark); }
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2px; }
+  .product-card { background: var(--bone); position: relative; overflow: hidden; cursor: pointer; group: true; }
+  .product-img { width: 100%; aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center; background: var(--bone); position: relative; overflow: hidden; transition: transform 0.4s ease; }
+  .product-card:hover .product-img { transform: scale(1.03); }
+  .perfume-visual { width: 80px; height: 120px; position: relative; }
+  .perfume-bottle { width: 60px; height: 100px; background: linear-gradient(135deg, rgba(184,148,90,0.6), rgba(184,148,90,0.2)); border-radius: 4px 4px 0 0; margin: 0 auto; position: relative; border: 1px solid rgba(184,148,90,0.4); }
+  .perfume-cap { width: 40px; height: 18px; background: var(--gold); border-radius: 2px; margin: 0 auto -1px; }
+  .perfume-neck { width: 20px; height: 14px; background: rgba(184,148,90,0.5); margin: 0 auto; }
+  .perfume-label-strip { position: absolute; bottom: 20px; left: 8px; right: 8px; height: 30px; background: rgba(255,255,255,0.6); display: flex; align-items: center; justify-content: center; }
+  .perfume-label-text { font-family: var(--font-display); font-size: 8px; letter-spacing: 0.1em; color: var(--dark); }
+  .p-badge { position: absolute; top: 16px; left: 16px; background: var(--dark); color: var(--cream); font-size: 10px; letter-spacing: 0.08em; padding: 4px 10px; text-transform: uppercase; z-index: 2; }
+  .p-badge.sale { background: #8B3A3A; }
+  .product-info { padding: 1.25rem 1.25rem 1.5rem; }
+  .p-category { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .p-name { font-family: var(--font-display); font-size: 20px; color: var(--dark); margin-bottom: 4px; font-weight: 400; }
+  .p-note { font-size: 12px; color: var(--muted); margin-bottom: 12px; line-height: 1.5; }
+  .p-footer { display: flex; align-items: center; justify-content: space-between; }
+  .p-price { font-family: var(--font-display); font-size: 20px; color: var(--dark); }
+  .p-price-old { font-size: 13px; color: var(--muted); text-decoration: line-through; margin-right: 6px; }
+  .p-add { width: 36px; height: 36px; background: var(--dark); color: var(--cream); border: none; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .p-add:hover { background: var(--gold); }
+
+  /* RESELLER */
+  .reseller-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin: 3rem 0; }
+  .tier-card { background: var(--bone); padding: 2.5rem 2rem; position: relative; }
+  .tier-card.highlight { background: var(--dark); }
+  .tier-rec { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--dark); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 16px; white-space: nowrap; }
+  .tier-num { font-family: var(--font-display); font-size: 60px; font-weight: 300; color: rgba(184,148,90,0.2); line-height: 1; margin-bottom: 8px; }
+  .tier-name-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .tier-title { font-family: var(--font-display); font-size: 28px; color: var(--dark); font-weight: 400; margin-bottom: 1rem; }
+  .tier-card.highlight .tier-title { color: var(--cream); }
+  .tier-card.highlight .tier-num { color: rgba(255,255,255,0.1); }
+  .tier-discount { font-family: var(--font-display); font-size: 44px; color: var(--gold); font-weight: 300; line-height: 1; margin-bottom: 0.5rem; }
+  .tier-discount span { font-size: 16px; font-family: var(--font-body); }
+  .tier-min { font-size: 12px; color: var(--muted); margin-bottom: 1.5rem; }
+  .tier-card.highlight .tier-min { color: rgba(253,250,247,0.5); }
+  .tier-features { list-style: none; }
+  .tier-features li { font-size: 13px; color: var(--muted); padding: 8px 0; border-bottom: 1px solid rgba(184,148,90,0.1); display: flex; align-items: center; gap: 8px; }
+  .tier-features li::before { content: '—'; color: var(--gold); font-size: 10px; flex-shrink: 0; }
+  .tier-card.highlight .tier-features li { color: rgba(253,250,247,0.7); }
+  .tier-btn { margin-top: 2rem; width: 100%; padding: 12px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--font-body); cursor: pointer; transition: all 0.2s; }
+  .tier-btn-light { background: transparent; color: var(--dark); border: 1px solid var(--dark); }
+  .tier-btn-light:hover { background: var(--dark); color: var(--cream); }
+  .tier-btn-gold { background: var(--gold); color: var(--dark); border: 1px solid var(--gold); font-weight: 500; }
+  .tier-btn-gold:hover { background: var(--gold-light); }
+
+  /* RESELLER DASHBOARD */
+  .portal-wrap { background: var(--dark); min-height: 100vh; padding-top: 64px; }
+  .portal-inner { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+  .portal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .portal-greeting { font-family: var(--font-display); font-size: 32px; font-weight: 300; color: var(--cream); }
+  .portal-greeting span { color: var(--gold); font-style: italic; }
+  .portal-badge { background: rgba(184,148,90,0.15); border: 1px solid rgba(184,148,90,0.3); color: var(--gold); font-size: 11px; letter-spacing: 0.1em; padding: 6px 16px; text-transform: uppercase; }
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-bottom: 2rem; }
+  .stat-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); padding: 1.5rem; }
+  .stat-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(253,250,247,0.4); margin-bottom: 12px; }
+  .stat-value { font-family: var(--font-display); font-size: 36px; font-weight: 300; color: var(--cream); line-height: 1; }
+  .stat-value.gold { color: var(--gold); }
+  .stat-change { font-size: 11px; color: #6BAF7A; margin-top: 6px; }
+  .portal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .portal-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); padding: 1.5rem; }
+  .portal-box-title { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 10px; }
+  .portal-box-title::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .order-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .order-row:last-child { border-bottom: none; }
+  .order-id { font-family: var(--font-display); font-size: 16px; color: var(--cream); }
+  .order-product { font-size: 12px; color: rgba(253,250,247,0.5); margin-top: 2px; }
+  .order-status { font-size: 10px; letter-spacing: 0.08em; padding: 3px 10px; text-transform: uppercase; }
+  .status-success { background: rgba(107,175,122,0.15); color: #6BAF7A; }
+  .status-pending { background: rgba(184,148,90,0.15); color: var(--gold); }
+  .order-amount { font-family: var(--font-display); font-size: 18px; color: var(--cream); }
+  .promo-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); align-items: center; }
+  .promo-item:last-child { border-bottom: none; }
+  .promo-icon { width: 40px; height: 40px; background: rgba(184,148,90,0.15); border: 1px solid rgba(184,148,90,0.2); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 16px; color: var(--gold); flex-shrink: 0; }
+  .promo-name { font-size: 13px; color: var(--cream); margin-bottom: 3px; }
+  .promo-desc { font-size: 11px; color: rgba(253,250,247,0.4); }
+  .promo-dl { font-size: 11px; color: var(--gold); cursor: pointer; text-align: right; flex-shrink: 0; letter-spacing: 0.05em; }
+
+  /* LOGIN FORM */
+  .login-wrap { min-height: calc(100vh - 64px); display: flex; align-items: center; justify-content: center; background: var(--dark); }
+  .login-box { width: 400px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 3rem; }
+  .login-title { font-family: var(--font-display); font-size: 32px; font-weight: 300; color: var(--cream); margin-bottom: 0.5rem; }
+  .login-sub { font-size: 13px; color: rgba(253,250,247,0.4); margin-bottom: 2rem; }
+  .form-group { margin-bottom: 1.25rem; }
+  .form-label { display: block; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(253,250,247,0.5); margin-bottom: 8px; }
+  .form-input { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--cream); padding: 12px 14px; font-family: var(--font-body); font-size: 14px; font-weight: 300; outline: none; transition: border-color 0.2s; }
+  .form-input:focus { border-color: var(--gold); }
+  .form-input::placeholder { color: rgba(253,250,247,0.2); }
+  .login-btn { width: 100%; background: var(--gold); color: var(--dark); border: none; padding: 14px; font-family: var(--font-body); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; margin-top: 1rem; transition: background 0.2s; font-weight: 500; }
+  .login-btn:hover { background: var(--gold-light); }
+  .login-or { text-align: center; font-size: 12px; color: rgba(253,250,247,0.3); margin: 1.5rem 0; }
+  .login-register { width: 100%; background: transparent; color: rgba(253,250,247,0.6); border: 1px solid rgba(255,255,255,0.1); padding: 12px; font-family: var(--font-body); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+  .login-register:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* FOOTER */
+  footer { background: var(--dark); color: rgba(253,250,247,0.5); font-size: 12px; letter-spacing: 0.05em; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+  .footer-brand { font-family: var(--font-display); font-size: 24px; color: var(--cream); font-weight: 300; margin-bottom: 1rem; }
+  .footer-brand span { color: var(--gold); }
+  .footer-desc { font-size: 13px; line-height: 1.8; color: rgba(253,250,247,0.4); }
+  .footer-col h4 { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { padding: 5px 0; }
+  .footer-col a { color: rgba(253,250,247,0.4); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--gold); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); text-align: center; padding: 1.5rem 2rem; font-size: 11px; color: rgba(253,250,247,0.2); letter-spacing: 0.08em; }
+
+  /* TOAST */
+  .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--dark); color: var(--cream); padding: 14px 24px; font-size: 13px; z-index: 999; transform: translateY(80px); opacity: 0; transition: all 0.3s; border-left: 3px solid var(--gold); }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* CART INDICATOR */
+  .cart-count { background: var(--gold); color: var(--dark); font-size: 9px; font-weight: 500; width: 16px; height: 16px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-left: 4px; vertical-align: middle; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-up { animation: fadeUp 0.6s ease forwards; }
+  .fade-up-2 { animation: fadeUp 0.6s 0.15s ease forwards; opacity: 0; }
+  .fade-up-3 { animation: fadeUp 0.6s 0.3s ease forwards; opacity: 0; }
+  .divider { width: 60px; height: 1px; background: var(--gold); margin: 2rem 0; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" onclick="showPage('home')">MAISON <span>SCENTARA</span></a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showPage('home')">Beranda</a></li>
+      <li><a href="#" onclick="showPage('catalog')">Katalog</a></li>
+      <li><a href="#" onclick="showPage('reseller')">Reseller</a></li>
+      <li><a href="#" onclick="showPage('login')" class="nav-cta">Portal Mitra <span class="cart-count" id="cartCount">0</span></a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== HOME PAGE ===== -->
+<div id="page-home" class="page active">
+  <div class="hero-wrap">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow fade-up">Parfum Premium · Batam Free Trade Zone</div>
+        <h1 class="fade-up-2">Aroma yang<br><em>Menceritakan</em><br>Dirimu</h1>
+        <p class="hero-desc fade-up-3">Koleksi parfum premium langsung dari jalur impor Batam. Kualitas butik internasional, harga yang lebih terjangkau untuk Anda dan jaringan reseller Anda.</p>
+        <div class="hero-btns fade-up-3">
+          <button class="btn-primary" onclick="showPage('catalog')">Lihat Koleksi</button>
+          <button class="btn-outline" onclick="showPage('reseller')">Jadi Reseller</button>
+        </div>
+      </div>
+      <div class="hero-visual fade-up-2">
+        <div class="hero-card">
+          <div class="hero-card-num">01</div>
+          <div class="hero-card-label">Koleksi aktif</div>
+          <div class="hero-card-val">48 Parfum</div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-num">02</div>
+          <div class="hero-card-label">Mitra reseller</div>
+          <div class="hero-card-val">127 Aktif</div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-num">03</div>
+          <div class="hero-card-label">Margin reseller</div>
+          <div class="hero-card-val">Hingga 40%</div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-num">04</div>
+          <div class="hero-card-label">Asal produk</div>
+          <div class="hero-card-val">Dubai · Paris</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="sec-label">Koleksi Unggulan</div>
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem;">
+      <h2 class="sec-title">Pilihan <em>Terlaris</em></h2>
+      <button class="btn-outline" onclick="showPage('catalog')" style="flex-shrink:0;">Lihat Semua</button>
+    </div>
+    <div class="product-grid" id="featuredGrid"></div>
+  </section>
+
+  <section style="background:var(--bone); max-width:100%; margin:0;">
+    <div style="max-width:1200px; margin:0 auto; padding:5rem 2rem; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;">
+      <div>
+        <div class="sec-label">Keunggulan Batam</div>
+        <h2 class="sec-title">Impor <em>Langsung,</em><br>Harga Lebih Baik</h2>
+        <div class="divider"></div>
+        <p style="font-size:14px; color:var(--muted); line-height:1.9; margin-bottom:1.5rem;">Sebagai bisnis berbasis di Batam Free Trade Zone, kami mengakses produk parfum premium langsung dari Dubai dan Eropa tanpa bea masuk penuh — penghematan yang kami teruskan ke Anda dan mitra reseller kami.</p>
+        <button class="btn-primary" onclick="showPage('reseller')">Bergabung Sebagai Reseller</button>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div style="background:var(--cream); padding:1.5rem;">
+          <div style="font-family:var(--font-display); font-size:40px; color:var(--gold); font-weight:300; line-height:1;">0%</div>
+          <div style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-top:6px;">Bea masuk FTZ</div>
+        </div>
+        <div style="background:var(--cream); padding:1.5rem;">
+          <div style="font-family:var(--font-display); font-size:40px; color:var(--gold); font-weight:300; line-height:1;">48h</div>
+          <div style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-top:6px;">Pengiriman ke Jawa</div>
+        </div>
+        <div style="background:var(--cream); padding:1.5rem;">
+          <div style="font-family:var(--font-display); font-size:40px; color:var(--gold); font-weight:300; line-height:1;">3×</div>
+          <div style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-top:6px;">Rotasi stok/bulan</div>
+        </div>
+        <div style="background:var(--cream); padding:1.5rem;">
+          <div style="font-family:var(--font-display); font-size:40px; color:var(--gold); font-weight:300; line-height:1;">5★</div>
+          <div style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-top:6px;">Rating rata-rata</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">MAISON <span>SCENTARA</span></div>
+        <p class="footer-desc">Platform parfum premium berbasis Batam. Kami menghubungkan pecinta wewangian dengan koleksi terbaik dari Dubai dan Eropa melalui jalur impor resmi Free Trade Zone.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Toko</h4>
+        <ul>
+          <li><a href="#">Koleksi Baru</a></li>
+          <li><a href="#">Best Seller</a></li>
+          <li><a href="#">Parfum Wanita</a></li>
+          <li><a href="#">Parfum Pria</a></li>
+          <li><a href="#">Gift Set</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Reseller</h4>
+        <ul>
+          <li><a href="#">Daftar Reseller</a></li>
+          <li><a href="#">Struktur Harga</a></li>
+          <li><a href="#">Starter Pack</a></li>
+          <li><a href="#">Portal Mitra</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontak</h4>
+        <ul>
+          <li><a href="#">WhatsApp</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+          <li><a href="#">Batam, Kepri</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 Maison Scentara · Batam Free Trade Zone · All rights reserved</div>
+  </footer>
+</div>
+
+<!-- ===== CATALOG PAGE ===== -->
+<div id="page-catalog" class="page">
+  <section style="padding-top:7rem;">
+    <div class="sec-label">Koleksi Lengkap</div>
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1rem;">
+      <h2 class="sec-title">Semua <em>Parfum</em></h2>
+      <div style="font-size:12px; color:var(--muted);" id="productCount">Menampilkan 12 produk</div>
+    </div>
+    <p class="sec-sub" style="margin-bottom:2rem;">Diimpor langsung dari Dubai & Eropa melalui jalur resmi Batam FTZ. Autentik, tahan lama, harga bersahabat.</p>
+    <div class="product-filters">
+      <button class="filter-btn active" onclick="filterProducts('all', this)">Semua</button>
+      <button class="filter-btn" onclick="filterProducts('floral', this)">Floral</button>
+      <button class="filter-btn" onclick="filterProducts('woody', this)">Woody</button>
+      <button class="filter-btn" onclick="filterProducts('oriental', this)">Oriental</button>
+      <button class="filter-btn" onclick="filterProducts('fresh', this)">Fresh</button>
+      <button class="filter-btn" onclick="filterProducts('oud', this)">Oud</button>
+    </div>
+    <div class="product-grid" id="catalogGrid"></div>
+  </section>
+</div>
+
+<!-- ===== RESELLER PAGE ===== -->
+<div id="page-reseller" class="page">
+  <section style="padding-top:7rem;">
+    <div class="sec-label">Program Kemitraan</div>
+    <h2 class="sec-title">Bangun Bisnis Parfum<br><em>Bersama Kami</em></h2>
+    <p class="sec-sub" style="margin-bottom:1rem;">Tiga tier kemitraan dirancang untuk semua level — dari ibu rumah tangga yang ingin penghasilan tambahan hingga distributor wilayah yang serius membangun jaringan.</p>
+    <div class="divider"></div>
+
+    <div class="reseller-grid">
+      <div class="tier-card">
+        <div class="tier-num">01</div>
+        <div class="tier-name-label">Tier 1</div>
+        <div class="tier-title">Reseller Reguler</div>
+        <div class="tier-discount">20% <span>diskon HET</span></div>
+        <div class="tier-min">Min. order Rp 500.000</div>
+        <ul class="tier-features">
+          <li>Boleh dropship (tanpa stok)</li>
+          <li>Katalog digital siap pakai</li>
+          <li>Grup support WhatsApp</li>
+          <li>Template caption konten</li>
+          <li>Komisi dibayar tiap Senin</li>
+        </ul>
+        <button class="tier-btn tier-btn-light" onclick="showPage('login')">Daftar Sekarang</button>
+      </div>
+      <div class="tier-card highlight" style="position:relative; margin-top:-8px; margin-bottom:-8px; z-index:1;">
+        <div class="tier-rec">Paling Populer</div>
+        <div class="tier-num">02</div>
+        <div class="tier-name-label">Tier 2</div>
+        <div class="tier-title" style="color:var(--cream);">Agen Aktif</div>
+        <div class="tier-discount">30% <span>diskon HET</span></div>
+        <div class="tier-min">Min. order Rp 2.000.000/bulan</div>
+        <ul class="tier-features">
+          <li>Semua benefit tier 1</li>
+          <li>Profil featured di website</li>
+          <li>Konten foto produk eksklusif</li>
+          <li>Rekrut reseller di bawah Anda</li>
+          <li>Bonus omzet bulanan</li>
+          <li>Akses harga tester murah</li>
+        </ul>
+        <button class="tier-btn tier-btn-gold" onclick="showPage('login')">Daftar Agen Aktif</button>
+      </div>
+      <div class="tier-card">
+        <div class="tier-num">03</div>
+        <div class="tier-name-label">Tier 3</div>
+        <div class="tier-title">Distributor Wilayah</div>
+        <div class="tier-discount">40% <span>diskon HET</span></div>
+        <div class="tier-min">Min. stok Rp 10.000.000</div>
+        <ul class="tier-features">
+          <li>Eksklusif per kota/provinsi</li>
+          <li>Kelola agen di bawah Anda</li>
+          <li>Nama di halaman resmi website</li>
+          <li>Prioritas stok produk baru</li>
+          <li>Konsultasi bisnis langsung</li>
+        </ul>
+        <button class="tier-btn tier-btn-light" onclick="showPage('login')">Hubungi Kami</button>
+      </div>
+    </div>
+
+    <div style="background:var(--bone); padding:2.5rem; margin-top:3rem; display:grid; grid-template-columns:1fr 1fr 1fr; gap:2rem; text-align:center;">
+      <div>
+        <div style="font-family:var(--font-display); font-size:48px; color:var(--gold); font-weight:300; line-height:1;">127</div>
+        <div style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-top:6px;">Reseller aktif saat ini</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-display); font-size:48px; color:var(--gold); font-weight:300; line-height:1;">Rp 4,2M</div>
+        <div style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-top:6px;">Rata-rata omzet agen/bulan</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-display); font-size:48px; color:var(--gold); font-weight:300; line-height:1;">24h</div>
+        <div style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-top:6px;">Proses aktivasi akun</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== LOGIN PAGE ===== -->
+<div id="page-login" class="page">
+  <div style="padding-top:64px; background:var(--dark); min-height:100vh;" id="loginSection">
+    <div class="login-wrap" style="padding-top:0;">
+      <div class="login-box">
+        <div style="margin-bottom:2rem;">
+          <div style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:16px;">Portal Mitra Reseller</div>
+          <div class="login-title">Selamat<br>Datang Kembali</div>
+          <div class="login-sub">Masuk ke dashboard reseller Anda</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email / No. HP</label>
+          <input class="form-input" type="text" placeholder="email@anda.com" id="loginEmail">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" type="password" placeholder="••••••••" id="loginPass">
+        </div>
+        <button class="login-btn" onclick="doLogin()">Masuk ke Dashboard</button>
+        <div class="login-or">atau</div>
+        <button class="login-register" onclick="showDashboard()">Daftar sebagai reseller baru</button>
+        <div style="text-align:center; margin-top:1.5rem;">
+          <span style="font-size:12px; color:rgba(253,250,247,0.3);">Demo: gunakan email & password apapun</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DASHBOARD PAGE ===== -->
+<div id="page-dashboard" class="page">
+  <div class="portal-wrap">
+    <div class="portal-inner">
+      <div class="portal-header">
+        <div>
+          <div style="font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:rgba(253,250,247,0.35); margin-bottom:6px;">Dashboard Reseller</div>
+          <div class="portal-greeting">Halo, <span>Sari Dewi</span></div>
+        </div>
+        <div style="display:flex; gap:12px; align-items:center;">
+          <div class="portal-badge">Agen Aktif — Tier 2</div>
+          <button class="btn-outline" onclick="showPage('catalog')" style="color:var(--cream); border-color:rgba(255,255,255,0.2); font-size:11px; padding:8px 16px;">Beli Stok</button>
+          <button class="btn-outline" onclick="showPage('home')" style="color:rgba(255,255,255,0.4); border-color:rgba(255,255,255,0.1); font-size:11px; padding:8px 16px;">Keluar</button>
+        </div>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-label">Omzet bulan ini</div>
+          <div class="stat-value gold">Rp 4,8M</div>
+          <div class="stat-change">↑ 23% vs bulan lalu</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Komisi diterima</div>
+          <div class="stat-value">Rp 1,44M</div>
+          <div class="stat-change">↑ 18% vs bulan lalu</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total order</div>
+          <div class="stat-value">47</div>
+          <div class="stat-change">↑ 8 order baru minggu ini</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Reseller saya</div>
+          <div class="stat-value">12</div>
+          <div class="stat-change">3 reseller baru bulan ini</div>
+        </div>
+      </div>
+
+      <div class="portal-grid">
+        <div class="portal-box">
+          <div class="portal-box-title">Order Terbaru</div>
+          <div class="order-row">
+            <div>
+              <div class="order-id">#ORD-2847</div>
+              <div class="order-product">Rose Elixir 50ml × 2</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="order-status status-success">Terkirim</div>
+              <div class="order-amount" style="margin-top:4px;">Rp 560rb</div>
+            </div>
+          </div>
+          <div class="order-row">
+            <div>
+              <div class="order-id">#ORD-2846</div>
+              <div class="order-product">Oud Noir 100ml × 1</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="order-status status-pending">Proses</div>
+              <div class="order-amount" style="margin-top:4px;">Rp 385rb</div>
+            </div>
+          </div>
+          <div class="order-row">
+            <div>
+              <div class="order-id">#ORD-2844</div>
+              <div class="order-product">Aqua Verde 30ml × 3</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="order-status status-success">Terkirim</div>
+              <div class="order-amount" style="margin-top:4px;">Rp 450rb</div>
+            </div>
+          </div>
+          <div class="order-row">
+            <div>
+              <div class="order-id">#ORD-2841</div>
+              <div class="order-product">Velvet Musk 50ml × 1</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="order-status status-success">Terkirim</div>
+              <div class="order-amount" style="margin-top:4px;">Rp 295rb</div>
+            </div>
+          </div>
+          <div class="order-row">
+            <div>
+              <div class="order-id">#ORD-2839</div>
+              <div class="order-product">Midnight Amber 100ml × 2</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="order-status status-pending">Proses</div>
+              <div class="order-amount" style="margin-top:4px;">Rp 720rb</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="portal-box">
+          <div class="portal-box-title">Materi Promosi</div>
+          <div class="promo-item">
+            <div class="promo-icon">KD</div>
+            <div style="flex:1;">
+              <div class="promo-name">Katalog Digital Juni 2025</div>
+              <div class="promo-desc">48 produk · PDF siap cetak · 12MB</div>
+            </div>
+            <div class="promo-dl" onclick="showToast('Katalog diunduh!')">↓ Unduh</div>
+          </div>
+          <div class="promo-item">
+            <div class="promo-icon">IG</div>
+            <div style="flex:1;">
+              <div class="promo-name">Pack Konten Instagram (30 post)</div>
+              <div class="promo-desc">Feed + stories · Siap posting · 45MB</div>
+            </div>
+            <div class="promo-dl" onclick="showToast('Konten IG diunduh!')">↓ Unduh</div>
+          </div>
+          <div class="promo-item">
+            <div class="promo-icon">TK</div>
+            <div style="flex:1;">
+              <div class="promo-name">Template Caption TikTok</div>
+              <div class="promo-desc">20 template caption viral · Docx</div>
+            </div>
+            <div class="promo-dl" onclick="showToast('Template diunduh!')">↓ Unduh</div>
+          </div>
+          <div class="promo-item">
+            <div class="promo-icon">PL</div>
+            <div style="flex:1;">
+              <div class="promo-name">Daftar Harga Reseller Juni</div>
+              <div class="promo-desc">Harga HPP & HET terbaru · Excel</div>
+            </div>
+            <div class="promo-dl" onclick="showToast('Price list diunduh!')">↓ Unduh</div>
+          </div>
+          <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid rgba(255,255,255,0.06);">
+            <div style="font-size:11px; color:rgba(253,250,247,0.35); margin-bottom:10px; letter-spacing:0.05em;">Link referral Anda</div>
+            <div style="display:flex; gap:8px;">
+              <div style="flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); padding:10px 12px; font-size:12px; color:rgba(253,250,247,0.5); font-family:monospace;">scentara.id/ref/sari-dewi</div>
+              <button style="background:var(--gold); color:var(--dark); border:none; padding:10px 16px; font-size:11px; cursor:pointer; font-family:var(--font-body); font-weight:500;" onclick="showToast('Link referral disalin!')">Salin</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="portal-box" style="margin-top:2px;">
+        <div class="portal-box-title">Stok Produk Populer — Bulan Ini</div>
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:0.5rem;">
+          <div style="background:rgba(255,255,255,0.03); padding:1.25rem;">
+            <div style="font-size:11px; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">Rose Elixir</div>
+            <div style="font-family:var(--font-display); font-size:28px; color:var(--cream); font-weight:300;">24 terjual</div>
+            <div style="height:4px; background:rgba(255,255,255,0.06); margin-top:10px; border-radius:2px;"><div style="height:4px; width:80%; background:var(--gold); border-radius:2px;"></div></div>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); padding:1.25rem;">
+            <div style="font-size:11px; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">Oud Noir</div>
+            <div style="font-family:var(--font-display); font-size:28px; color:var(--cream); font-weight:300;">18 terjual</div>
+            <div style="height:4px; background:rgba(255,255,255,0.06); margin-top:10px; border-radius:2px;"><div style="height:4px; width:60%; background:var(--gold); border-radius:2px;"></div></div>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); padding:1.25rem;">
+            <div style="font-size:11px; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">Midnight Amber</div>
+            <div style="font-family:var(--font-display); font-size:28px; color:var(--cream); font-weight:300;">15 terjual</div>
+            <div style="height:4px; background:rgba(255,255,255,0.06); margin-top:10px; border-radius:2px;"><div style="height:4px; width:50%; background:var(--gold); border-radius:2px;"></div></div>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); padding:1.25rem;">
+            <div style="font-size:11px; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">Aqua Verde</div>
+            <div style="font-family:var(--font-display); font-size:28px; color:var(--cream); font-weight:300;">11 terjual</div>
+            <div style="height:4px; background:rgba(255,255,255,0.06); margin-top:10px; border-radius:2px;"><div style="height:4px; width:36%; background:var(--gold); border-radius:2px;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const products = [
+  { id:1, name:'Rose Elixir', cat:'floral', note:'Mawar Turki · Iris · Musk Putih', price:'Rp 285.000', oldPrice:'', badge:'Best Seller', color:'#E8D5C4', size:'50ml' },
+  { id:2, name:'Oud Noir', cat:'oud', note:'Oud Arab · Cendana · Amber', price:'Rp 385.000', oldPrice:'', badge:'', color:'#C4B49A', size:'100ml' },
+  { id:3, name:'Midnight Amber', cat:'oriental', note:'Amber · Vanilla · Patchouli', price:'Rp 320.000', oldPrice:'Rp 380.000', badge:'Sale', color:'#D4B483', size:'50ml' },
+  { id:4, name:'Aqua Verde', cat:'fresh', note:'Bergamot · Vetiver · Cedar', price:'Rp 195.000', oldPrice:'', badge:'Baru', color:'#A8C5B5', size:'30ml' },
+  { id:5, name:'Velvet Musk', cat:'woody', note:'Musk · Sandalwood · Vanilla', price:'Rp 295.000', oldPrice:'', badge:'', color:'#C9A898', size:'50ml' },
+  { id:6, name:'Iris Blanc', cat:'floral', note:'Iris · Bergamot · Cedarwood', price:'Rp 345.000', oldPrice:'', badge:'', color:'#D4C8E0', size:'50ml' },
+  { id:7, name:'Desert Gold', cat:'oud', note:'Oud · Rose · Saffron', price:'Rp 450.000', oldPrice:'', badge:'Premium', color:'#E0C88A', size:'100ml' },
+  { id:8, name:'Citrus Bloom', cat:'fresh', note:'Lemon · Neroli · Ambrette', price:'Rp 175.000', oldPrice:'', badge:'', color:'#E8DFB5', size:'30ml' },
+  { id:9, name:'Bois Sacré', cat:'woody', note:'Oud · Cendana · Benzoin', price:'Rp 395.000', oldPrice:'', badge:'', color:'#B8A080', size:'100ml' },
+  { id:10, name:'Dahlia Noir', cat:'floral', note:'Dahlia · Patchouli · Musk', price:'Rp 260.000', oldPrice:'Rp 310.000', badge:'Sale', color:'#C4A0B0', size:'50ml' },
+  { id:11, name:'Neroli Dream', cat:'fresh', note:'Neroli · Jasmine · White Musk', price:'Rp 225.000', oldPrice:'', badge:'Baru', color:'#D4E0C0', size:'50ml' },
+  { id:12, name:'Black Saffron', cat:'oriental', note:'Saffron · Leather · Cedarwood', price:'Rp 420.000', oldPrice:'', badge:'', color:'#A89070', size:'100ml' },
+];
+
+let cart = 0;
+
+function renderProducts(list, containerId) {
+  const grid = document.getElementById(containerId);
+  if (!grid) return;
+  grid.innerHTML = list.map(p => `
+    <div class="product-card">
+      ${p.badge ? `<div class="p-badge${p.badge==='Sale'?' sale':''}">${p.badge}</div>` : ''}
+      <div class="product-img">
+        <div class="perfume-visual">
+          <div class="perfume-cap"></div>
+          <div class="perfume-neck"></div>
+          <div class="perfume-bottle" style="background:linear-gradient(135deg,${p.color}99,${p.color}44);">
+            <div class="perfume-label-strip">
+              <div class="perfume-label-text">${p.name.toUpperCase()}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="p-category">${p.cat} · ${p.size}</div>
+        <div class="p-name">${p.name}</div>
+        <div class="p-note">${p.note}</div>
+        <div class="p-footer">
+          <div>
+            ${p.oldPrice ? `<span class="p-price-old">${p.oldPrice}</span>` : ''}
+            <span class="p-price">${p.price}</span>
+          </div>
+          <button class="p-add" onclick="addToCart('${p.name}')">+</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addToCart(name) {
+  cart++;
+  document.getElementById('cartCount').textContent = cart;
+  showToast(name + ' ditambahkan ke keranjang');
+}
+
+function filterProducts(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const filtered = cat === 'all' ? products : products.filter(p => p.cat === cat);
+  document.getElementById('productCount').textContent = `Menampilkan ${filtered.length} produk`;
+  renderProducts(filtered, 'catalogGrid');
+}
+
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  window.scrollTo(0, 0);
+  if (page === 'catalog') renderProducts(products, 'catalogGrid');
+  if (page === 'home') renderProducts(products.slice(0,4), 'featuredGrid');
+}
+
+function doLogin() {
+  const email = document.getElementById('loginEmail').value;
+  const pass = document.getElementById('loginPass').value;
+  if (email.length > 0 && pass.length > 0) {
+    showToast('Login berhasil! Selamat datang, Sari Dewi');
+    setTimeout(() => showDashboard(), 800);
+  } else {
+    showToast('Masukkan email dan password dulu ya');
+  }
+}
+
+function showDashboard() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-dashboard').classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+renderProducts(products.slice(0,4), 'featuredGrid');
+</script>
+</body>
+</html>
