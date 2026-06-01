@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rencana Bisnis — RantauMart: Marketplace Oleh-oleh Minang</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0D0A06;
+  --ink2:#2A2016;
+  --warm:#7A5C3A;
+  --gold:#C8882A;
+  --gold2:#E8B860;
+  --sand:#F5EDD8;
+  --sand2:#EDE0C4;
+  --red:#9B2A1E;
+  --green:#1A5C38;
+  --cream:#FDFAF4;
+  --white:#FFFFFF;
+  --border:rgba(13,10,6,0.1);
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'Syne',sans-serif;
+  --mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--cream);color:var(--ink);overflow-x:hidden;font-size:16px}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:60px}
+.nav-brand{font-family:var(--serif);font-size:20px;color:var(--gold2);letter-spacing:.02em}
+.nav-brand span{color:rgba(255,255,255,.5);font-style:italic}
+.nav-tabs{display:flex;gap:4px}
+.nav-tab{font-size:12px;font-weight:500;color:rgba(255,255,255,.4);padding:6px 12px;border-radius:6px;cursor:pointer;transition:all .2s;letter-spacing:.04em;border:none;background:transparent}
+.nav-tab:hover,.nav-tab.active{background:rgba(200,136,42,.15);color:var(--gold2)}
+.nav-dl{font-size:12px;background:var(--gold);color:var(--ink);padding:7px 16px;border-radius:20px;font-weight:700;cursor:pointer;border:none;letter-spacing:.03em;transition:background .2s}
+.nav-dl:hover{background:var(--gold2)}
+
+/* SECTIONS */
+.page{display:none;animation:fadeIn .3s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── COVER PAGE ── */
+.cover{min-height:92vh;background:var(--ink);display:flex;align-items:center;padding:80px 6%;position:relative;overflow:hidden}
+.cover-bg{position:absolute;inset:0;background:
+  radial-gradient(ellipse 60% 50% at 80% 50%, rgba(200,136,42,.12) 0%, transparent 70%),
+  radial-gradient(ellipse 40% 60% at 10% 80%, rgba(155,42,30,.1) 0%, transparent 60%);
+}
+.cover-pattern{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(45deg,var(--gold) 0,var(--gold) 1px,transparent 0,transparent 50%);background-size:20px 20px}
+.cover-inner{max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:1;display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:center}
+.cover-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);border:1px solid rgba(200,136,42,.3);padding:6px 16px;border-radius:30px;margin-bottom:28px}
+.cover-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.cover h1{font-family:var(--serif);font-size:clamp(40px,6vw,80px);font-weight:400;line-height:1.02;color:var(--white);margin-bottom:24px}
+.cover h1 em{color:var(--gold2);font-style:italic}
+.cover-sub{font-size:15px;color:rgba(255,255,255,.5);line-height:1.8;max-width:480px;margin-bottom:40px}
+.cover-pill-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:48px}
+.cover-pill{font-size:12px;font-weight:500;padding:7px 16px;border-radius:20px;letter-spacing:.03em}
+.cp-gold{background:rgba(200,136,42,.15);color:var(--gold2);border:1px solid rgba(200,136,42,.3)}
+.cp-red{background:rgba(155,42,30,.2);color:#F08070;border:1px solid rgba(155,42,30,.3)}
+.cp-green{background:rgba(26,92,56,.2);color:#70C090;border:1px solid rgba(26,92,56,.3)}
+.cover-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06);border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+.kpi-item{background:rgba(255,255,255,.03);padding:24px 20px}
+.kpi-num{font-family:var(--serif);font-size:38px;color:var(--gold2);line-height:1}
+.kpi-label{font-size:11px;color:rgba(255,255,255,.4);margin-top:6px;letter-spacing:.04em;text-transform:uppercase}
+
+.cover-right{display:flex;flex-direction:column;gap:14px}
+.cover-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;cursor:pointer;transition:all .2s}
+.cover-card:hover{background:rgba(200,136,42,.08);border-color:rgba(200,136,42,.25)}
+.cover-card-num{font-family:var(--mono);font-size:11px;color:var(--gold);margin-bottom:8px}
+.cover-card-title{font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px}
+.cover-card-sub{font-size:12px;color:rgba(255,255,255,.4);line-height:1.5}
+.cover-card-arrow{color:var(--gold);float:right;margin-top:-20px;font-size:18px}
+
+/* ── CONTENT SECTIONS ── */
+.sec{padding:72px 6%}
+.sec-inner{max-width:1100px;margin:0 auto}
+.sec-header{margin-bottom:48px}
+.sec-num{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.1em;margin-bottom:8px}
+.sec-title{font-family:var(--serif);font-size:clamp(30px,4vw,52px);color:var(--ink);line-height:1.1;margin-bottom:12px}
+.sec-title em{color:var(--gold);font-style:italic}
+.sec-desc{font-size:15px;color:var(--warm);line-height:1.8;max-width:580px}
+
+/* GRID HELPERS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+
+/* CARDS */
+.card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:24px}
+.card-dark{background:var(--ink);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px;color:var(--white)}
+.card-sand{background:var(--sand);border:1px solid var(--sand2);border-radius:16px;padding:24px}
+.card-gold{background:var(--gold);border-radius:16px;padding:24px;color:var(--ink)}
+
+.card-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px;flex-shrink:0}
+.ci-gold{background:rgba(200,136,42,.12);color:var(--gold)}
+.ci-red{background:rgba(155,42,30,.1);color:var(--red)}
+.ci-green{background:rgba(26,92,56,.1);color:var(--green)}
+.ci-sand{background:var(--sand2)}
+.card-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--warm);margin-bottom:6px}
+.card-title{font-family:var(--serif);font-size:20px;color:var(--ink);margin-bottom:8px;line-height:1.2}
+.card-title-white{font-family:var(--serif);font-size:20px;color:var(--white);margin-bottom:8px;line-height:1.2}
+.card-text{font-size:13px;color:var(--warm);line-height:1.7}
+.card-text-white{font-size:13px;color:rgba(255,255,255,.55);line-height:1.7}
+
+/* BADGE */
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.05em;text-transform:uppercase}
+.b-gold{background:rgba(200,136,42,.12);color:var(--gold)}
+.b-red{background:rgba(155,42,30,.1);color:var(--red)}
+.b-green{background:rgba(26,92,56,.1);color:var(--green)}
+.b-dark{background:var(--ink);color:var(--gold2)}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:20px;padding-bottom:32px;position:relative}
+.tl-item::before{content:'';position:absolute;left:19px;top:40px;bottom:0;width:1px;background:var(--border)}
+.tl-item:last-child::before{display:none}
+.tl-dot{width:40px;height:40px;border-radius:50%;background:var(--ink);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--gold2);flex-shrink:0;z-index:1}
+.tl-content{padding-top:8px;flex:1}
+.tl-week{font-family:var(--mono);font-size:11px;color:var(--gold);margin-bottom:4px;letter-spacing:.06em}
+.tl-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.tl-text{font-size:13px;color:var(--warm);line-height:1.7}
+.tl-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tl-chip{font-size:11px;background:var(--sand);color:var(--warm);padding:3px 10px;border-radius:10px;font-weight:500}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--warm);padding:10px 14px;border-bottom:2px solid var(--border)}
+.tbl td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--ink);vertical-align:top;line-height:1.6}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--sand)}
+.tbl .price{font-family:var(--serif);font-size:16px;color:var(--gold);font-weight:400}
+
+/* FEATURE LIST */
+.feat-list{display:flex;flex-direction:column;gap:10px}
+.feat-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:12px}
+.feat-check{width:22px;height:22px;border-radius:50%;background:rgba(26,92,56,.1);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-top:1px}
+.feat-name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.feat-sub{font-size:12px;color:var(--warm);line-height:1.5}
+
+/* REVENUE BARS */
+.rev-row{margin-bottom:14px}
+.rev-header{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+.rev-label{color:var(--ink);font-weight:500}
+.rev-val{font-family:var(--serif);font-size:15px;color:var(--gold)}
+.rev-bar{height:8px;background:var(--sand2);border-radius:4px;overflow:hidden}
+.rev-fill{height:100%;border-radius:4px;transition:width 1s ease}
+
+/* SITEMAP */
+.sitemap{display:flex;flex-direction:column;gap:16px}
+.sm-row{display:flex;gap:12px;align-items:flex-start}
+.sm-parent{background:var(--ink);color:var(--gold2);font-size:13px;font-weight:700;padding:10px 16px;border-radius:10px;min-width:160px;text-align:center;flex-shrink:0}
+.sm-children{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sm-child{background:var(--sand);color:var(--warm);font-size:12px;padding:7px 12px;border-radius:8px;border:1px solid var(--sand2);font-weight:500}
+.sm-child.feature{background:rgba(200,136,42,.08);color:var(--gold);border-color:rgba(200,136,42,.2)}
+.sm-arrow{color:var(--border);font-size:20px;flex-shrink:0;padding-top:8px}
+
+/* WA TEMPLATE */
+.wa-box{background:var(--ink);border-radius:16px;padding:24px 28px;position:relative;overflow:hidden}
+.wa-box::before{content:'WhatsApp Template';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;margin-bottom:16px;font-family:var(--mono)}
+.wa-text{font-size:14px;color:rgba(255,255,255,.8);line-height:1.9}
+.wa-var{display:inline-block;background:rgba(200,136,42,.2);color:var(--gold2);border-radius:4px;padding:0 5px;font-family:var(--mono);font-size:12px}
+
+/* QUOTE BLOCK */
+.quote-block{border-left:3px solid var(--gold);padding:16px 20px;background:var(--sand);border-radius:0 12px 12px 0;margin:20px 0}
+.quote-text{font-family:var(--serif);font-size:18px;color:var(--ink);font-style:italic;line-height:1.5;margin-bottom:6px}
+.quote-src{font-size:12px;color:var(--warm);font-weight:500}
+
+/* STAT GRID */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:24px 0}
+.stat-item{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px}
+.stat-num{font-family:var(--serif);font-size:36px;color:var(--gold);line-height:1}
+.stat-label{font-size:12px;color:var(--warm);margin-top:4px;line-height:1.5}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:32px 0}
+
+/* DARK SECTION */
+.sec-dark{background:var(--ink);padding:72px 6%}
+.sec-dark .sec-title{color:var(--white)}
+.sec-dark .sec-desc{color:rgba(255,255,255,.5)}
+.sec-dark .sec-num{color:var(--gold2)}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:8px}
+.cl-item{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--warm);line-height:1.6}
+.cl-item::before{content:'→';color:var(--gold);font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .cover-inner{grid-template-columns:1fr}
+  .cover-right{display:none}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  nav .nav-tabs{display:none}
+}
+@media(max-width:600px){
+  .kpi-item{padding:16px 14px}
+  .kpi-num{font-size:28px}
+  .sec{padding:52px 5%}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">RantauMart <span>Business Plan</span></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('cover')">Overview</button>
+    <button class="nav-tab" onclick="showPage('model')">Model Bisnis</button>
+    <button class="nav-tab" onclick="showPage('struktur')">Struktur Web</button>
+    <button class="nav-tab" onclick="showPage('seller')">Rekrut Seller</button>
+    <button class="nav-tab" onclick="showPage('promosi')">Promosi</button>
+    <button class="nav-tab" onclick="showPage('keuangan')">Keuangan</button>
+    <button class="nav-tab" onclick="showPage('roadmap')">Roadmap</button>
+  </div>
+  <button class="nav-dl" onclick="window.print()">⬇ Cetak PDF</button>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     PAGE 0: COVER / OVERVIEW
+══════════════════════════════════════════ -->
+<div class="page active" id="page-cover">
+<div class="cover">
+  <div class="cover-bg"></div>
+  <div class="cover-pattern"></div>
+  <div class="cover-inner">
+    <div>
+      <div class="cover-tag">Rencana Bisnis · 2024–2025</div>
+      <h1>Marketplace<br>oleh-oleh<br><em>Minang</em></h1>
+      <p class="cover-sub">Platform e-commerce khusus produk autentik Sumatera Barat — rendang, keripik balado, kopi Solok, tenun — yang menghubungkan pengrajin & UMKM Sumbar dengan jutaan perantau Minang di seluruh Indonesia.</p>
+      <div class="cover-pill-row">
+        <span class="cover-pill cp-gold">B2C Marketplace</span>
+        <span class="cover-pill cp-red">Produk Lokal Sumbar</span>
+        <span class="cover-pill cp-green">Target: Perantau Minang</span>
+      </div>
+      <div class="cover-kpi">
+        <div class="kpi-item"><div class="kpi-num">7jt+</div><div class="kpi-label">Perantau Minang di RI</div></div>
+        <div class="kpi-item"><div class="kpi-num">Rp 2T+</div><div class="kpi-label">Potensi pasar/tahun</div></div>
+        <div class="kpi-item"><div class="kpi-num">3 bln</div><div class="kpi-label">Target MVP live</div></div>
+      </div>
+    </div>
+    <div class="cover-right">
+      <div class="cover-card" onclick="showPage('model')">
+        <div class="cover-card-num">01 — MODEL BISNIS</div>
+        <div class="cover-card-title">Komisi + Iklan + Langganan</div>
+        <div class="cover-card-sub">3 aliran pendapatan utama. Mulai dari komisi 8–15% per transaksi.</div>
+        <div class="cover-card-arrow">→</div>
+      </div>
+      <div class="cover-card" onclick="showPage('struktur')">
+        <div class="cover-card-num">02 — STRUKTUR WEBSITE</div>
+        <div class="cover-card-title">Sitemap & fitur utama MVP</div>
+        <div class="cover-card-sub">Tech stack, halaman-halaman penting, dan integrasi pembayaran.</div>
+        <div class="cover-card-arrow">→</div>
+      </div>
+      <div class="cover-card" onclick="showPage('seller')">
+        <div class="cover-card-num">03 — REKRUT SELLER</div>
+        <div class="cover-card-title">Strategi onboarding 50 seller pertama</div>
+        <div class="cover-card-sub">Template WA, target seller, insentif, dan proses verifikasi.</div>
+        <div class="cover-card-arrow">→</div>
+      </div>
+      <div class="cover-card" onclick="showPage('promosi')">
+        <div class="cover-card-num">04 — PROMOSI</div>
+        <div class="cover-card-title">Jangkau perantau Minang</div>
+        <div class="cover-card-sub">TikTok, komunitas perantau, kampus, dan strategi viral Minang.</div>
+        <div class="cover-card-arrow">→</div>
+      </div>
+      <div class="cover-card" onclick="showPage('keuangan')">
+        <div class="cover-card-num">05 — KEUANGAN</div>
+        <div class="cover-card-title">Proyeksi 12 bulan pertama</div>
+        <div class="cover-card-sub">Modal awal, BEP, dan target pendapatan bulan ke-6.</div>
+        <div class="cover-card-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 1: MODEL BISNIS
+══════════════════════════════════════════ -->
+<div class="page" id="page-model">
+<div class="sec">
+<div class="sec-inner">
+  <div class="sec-header">
+    <div class="sec-num">01 — MODEL BISNIS</div>
+    <div class="sec-title">Bagaimana <em>RantauMart</em> menghasilkan uang</div>
+    <p class="sec-desc">Tiga aliran pendapatan yang saling menguatkan — dimulai dari komisi transaksi, lalu berkembang ke iklan dan langganan premium.</p>
+  </div>
+
+  <div class="g3" style="margin-bottom:24px">
+    <div class="card-dark">
+      <div class="card-icon ci-gold" style="background:rgba(200,136,42,.15)">💰</div>
+      <div class="card-label" style="color:var(--gold)">Pendapatan utama</div>
+      <div class="card-title-white">Komisi transaksi</div>
+      <div class="card-text-white">8–15% dari setiap penjualan. Seller gratis bergabung, platform ambil komisi otomatis. Makin banyak transaksi, makin besar pendapatan.</div>
+      <div style="margin-top:14px;font-family:var(--serif);font-size:28px;color:var(--gold2)">8–15%</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:4px">per transaksi</div>
+    </div>
+    <div class="card">
+      <div class="card-icon ci-gold">📦</div>
+      <div class="card-label">Pendapatan ke-2</div>
+      <div class="card-title">Seller premium</div>
+      <div class="card-text">Seller bisa bayar Rp 99–299rb/bulan untuk fitur ekstra: toko teratas di pencarian, badge "Seller Pilihan", laporan analitik, dan promo khusus.</div>
+      <div style="margin-top:14px;font-family:var(--serif);font-size:28px;color:var(--gold)">Rp 99rb–<br>299rb</div>
+      <div style="font-size:11px;color:var(--warm);margin-top:4px">per seller/bulan</div>
+    </div>
+    <div class="card-sand">
+      <div class="card-icon ci-gold">📣</div>
+      <div class="card-label">Pendapatan ke-3</div>
+      <div class="card-title">Iklan & featured</div>
+      <div class="card-text">Banner iklan di homepage, produk "Featured" di kategori, dan paket promosi musiman (Lebaran, Tahun Baru) untuk seller yang mau lebih terlihat.</div>
+      <div style="margin-top:14px;font-family:var(--serif);font-size:28px;color:var(--gold)">Rp 200rb–<br>2jt</div>
+      <div style="font-size:11px;color:var(--warm);margin-top:4px">per paket iklan</div>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"Perantau Minang bukan hanya pasar — mereka adalah agen distribusi terbaik. Satu perantau yang puas akan merekomendasikan ke seluruh grup keluarga di WhatsApp."</div>
+    <div class="quote-src">Insight kunci RantauMart</div>
+  </div>
+
+  <div class="g2" style="margin-top:24px">
+    <div class="card">
+      <div class="card-label">Target pasar utama (pembeli)</div>
+      <div class="card-title">Perantau Minang</div>
+      <div class="divider"></div>
+      <div class="checklist">
+        <div class="cl-item">7+ juta perantau Minang tersebar di Jawa, Kalimantan, Riau, Kepri</div>
+        <div class="cl-item">Kekuatan beli menengah-atas, rindu masakan kampung</div>
+        <div class="cl-item">Aktif di grup WA keluarga & komunitas perantau</div>
+        <div class="cl-item">Rutin beli oleh-oleh saat mudik atau untuk dikirim ke kota</div>
+        <div class="cl-item">Loyal pada merek lokal Minang yang autentik</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Target pasar (seller)</div>
+      <div class="card-title">UMKM Sumbar</div>
+      <div class="divider"></div>
+      <div class="checklist">
+        <div class="cl-item">Produsen rendang rumahan & skala menengah</div>
+        <div class="cl-item">Pemasok keripik balado, sanjai, karupuak</div>
+        <div class="cl-item">Petani & pengolah kopi Solok Radjo, Agam</div>
+        <div class="cl-item">Pengrajin tenun Silungkang & songket Pandai Sikek</div>
+        <div class="cl-item">Toko oleh-oleh di Bukittinggi, Padang Panjang, Payakumbuh</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <div class="card-label">Keunggulan kompetitif vs Shopee / Tokopedia</div>
+    <div class="card-title">Kenapa RantauMart berbeda?</div>
+    <div class="divider"></div>
+    <div class="g3">
+      <div>
+        <div style="font-size:22px;margin-bottom:8px">🏔️</div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px">Niche = dipercaya</div>
+        <div style="font-size:12px;color:var(--warm);line-height:1.6">Pembeli tahu semua produk di sini asli Sumbar — bukan produk serupa dari Jawa.</div>
+      </div>
+      <div>
+        <div style="font-size:22px;margin-bottom:8px">🧊</div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px">Spesialisasi frozen food</div>
+        <div style="font-size:12px;color:var(--warm);line-height:1.6">Kurasi pengiriman rendang & lauk frozen ke seluruh Indonesia, lengkap dengan panduan packing.</div>
+      </div>
+      <div>
+        <div style="font-size:22px;margin-bottom:8px">🤝</div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px">Komunitas perantau</div>
+        <div style="font-size:12px;color:var(--warm);line-height:1.6">Fitur "Titip belikan" antar sesama perantau & grup pembelian bareng di komunitas.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 2: STRUKTUR WEBSITE
+══════════════════════════════════════════ -->
+<div class="page" id="page-struktur">
+<div class="sec">
+<div class="sec-inner">
+  <div class="sec-header">
+    <div class="sec-num">02 — STRUKTUR WEBSITE</div>
+    <div class="sec-title">Arsitektur & <em>sitemap</em> lengkap</div>
+    <p class="sec-desc">Semua halaman yang dibutuhkan untuk MVP dan fitur lanjutan di fase berikutnya.</p>
+  </div>
+
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-label">Tech stack yang direkomendasikan</div>
+    <div class="g4" style="margin-top:16px">
+      <div style="background:var(--sand);border-radius:10px;padding:14px 16px">
+        <div style="font-size:11px;color:var(--warm);margin-bottom:4px;font-weight:700">FRONTEND</div>
+        <div style="font-size:13px;color:var(--ink);font-weight:500">Next.js + Tailwind</div>
+        <div style="font-size:11px;color:var(--warm);margin-top:2px">Mobile-first, SEO optimal</div>
+      </div>
+      <div style="background:var(--sand);border-radius:10px;padding:14px 16px">
+        <div style="font-size:11px;color:var(--warm);margin-bottom:4px;font-weight:700">BACKEND</div>
+        <div style="font-size:13px;color:var(--ink);font-weight:500">Supabase / Firebase</div>
+        <div style="font-size:11px;color:var(--warm);margin-top:2px">Database + Auth gratis di awal</div>
+      </div>
+      <div style="background:var(--sand);border-radius:10px;padding:14px 16px">
+        <div style="font-size:11px;color:var(--warm);margin-bottom:4px;font-weight:700">PEMBAYARAN</div>
+        <div style="font-size:13px;color:var(--ink);font-weight:500">Midtrans / Xendit</div>
+        <div style="font-size:11px;color:var(--warm);margin-top:2px">Transfer, QRIS, VA, kartu</div>
+      </div>
+      <div style="background:var(--sand);border-radius:10px;padding:14px 16px">
+        <div style="font-size:11px;color:var(--warm);margin-bottom:4px;font-weight:700">NOTIFIKASI</div>
+        <div style="font-size:13px;color:var(--ink);font-weight:500">WhatsApp API + Email</div>
+        <div style="font-size:11px;color:var(--warm);margin-top:2px">Konfirmasi order & tracking</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-label">Sitemap lengkap RantauMart</div>
+    <div class="sitemap" style="margin-top:20px">
+      <div class="sm-row">
+        <div class="sm-parent">🏠 Beranda</div>
+        <div class="sm-arrow">→</div>
+        <div class="sm-children">
+          <span class="sm-child">Hero + tagline</span>
+          <span class="sm-child">Produk terlaris</span>
+          <span class="sm-child">Kategori utama</span>
+          <span class="sm-child">Seller pilihan</span>
+          <span class="sm-child feature">Banner promo</span>
+          <span class="sm-child">Testimoni</span>
+        </div>
+      </div>
+      <div class="sm-row">
+        <div class="sm-parent">🛍️ Katalog</div>
+        <div class="sm-arrow">→</div>
+        <div class="sm-children">
+          <span class="sm-child">Rendang & lauk</span>
+          <span class="sm-child">Keripik & camilan</span>
+          <span class="sm-child">Kopi & minuman</span>
+          <span class="sm-child">Kain & kerajinan</span>
+          <span class="sm-child feature">Filter kota asal</span>
+          <span class="sm-child feature">Filter frozen/non-frozen</span>
+          <span class="sm-child">Pencarian produk</span>
+        </div>
+      </div>
+      <div class="sm-row">
+        <div class="sm-parent">🏪 Toko Seller</div>
+        <div class="sm-arrow">→</div>
+        <div class="sm-children">
+          <span class="sm-child">Profil toko</span>
+          <span class="sm-child">Daftar produk</span>
+          <span class="sm-child">Rating & ulasan</span>
+          <span class="sm-child feature">Badge "Seller Pilihan"</span>
+          <span class="sm-child">Info pengiriman</span>
+        </div>
+      </div>
+      <div class="sm-row">
+        <div class="sm-parent">📦 Produk Detail</div>
+        <div class="sm-arrow">→</div>
+        <div class="sm-children">
+          <span class="sm-child">Foto & deskripsi</span>
+          <span class="sm-child">Pilihan varian</span>
+          <span class="sm-child">Estimasi ongkir</span>
+          <span class="sm-child feature">Panduan packing frozen</span>
+          <span class="sm-child">Ulasan pembeli</span>
+          <span class="sm-child">Produk serupa</span>
+        </div>
+      </div>
+      <div class="sm-row">
+        <div class="sm-parent">💳 Checkout</div>
+        <div class="sm-arrow">→</div>
+        <div class="sm-children">
+          <span class="sm-child">Keranjang belanja</span>
+          <span class="sm-child">Pilih alamat</span>
+          <span class="sm-child">Pilih kurir</span>
+          <span class="sm-child">Kode promo</span>
+          <span class="sm-child feature">QRIS / Transfer / VA</span>
+          <span class="sm-child">Konfirmasi WA</span>
+        </div>
+      </div>
+      <div class="sm-row">
+        <div class="sm-parent">👤 Dashboard Seller</div>
+        <div class="sm-arrow">→</div>
+        <div class="sm-children">
+          <span class="sm-child">Kelola produk</span>
+          <span class="sm-child">Daftar pesanan</span>
+          <span class="sm-child">Laporan penjualan</span>
+          <span class="sm-child feature">Analitik trafik toko</span>
+          <span class="sm-child">Penarikan saldo</span>
+          <span class="sm-child feature">Upgrade ke Premium</span>
+        </div>
+      </div>
+      <div class="sm-row">
+        <div class="sm-parent">🛡️ Admin Panel</div>
+        <div class="sm-arrow">→</div>
+        <div class="sm-children">
+          <span class="sm-child">Verifikasi seller</span>
+          <span class="sm-child">Moderasi produk</span>
+          <span class="sm-child">Kelola komisi</span>
+          <span class="sm-child">Laporan keuangan</span>
+          <span class="sm-child feature">Manajemen iklan</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:12px;font-size:12px;color:var(--warm);font-style:italic">
+      <span style="background:rgba(200,136,42,.1);color:var(--gold);padding:2px 8px;border-radius:6px;font-style:normal">Warna emas</span> = fitur fase 2 (setelah MVP live)
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-label">Fitur wajib MVP (bulan 1–3)</div>
+      <div class="feat-list" style="margin-top:14px">
+        <div class="feat-item"><div class="feat-check">✓</div><div><div class="feat-name">Registrasi & login seller/buyer</div><div class="feat-sub">Via email + Google OAuth</div></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div><div class="feat-name">Upload & kelola produk</div><div class="feat-sub">Foto, deskripsi, harga, stok</div></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div><div class="feat-name">Keranjang & checkout</div><div class="feat-sub">Multi-seller dalam satu checkout</div></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div><div class="feat-name">Payment gateway</div><div class="feat-sub">Transfer bank, QRIS, Virtual Account</div></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div><div class="feat-name">Notifikasi WhatsApp</div><div class="feat-sub">Konfirmasi order ke pembeli & seller</div></div></div>
+        <div class="feat-item"><div class="feat-check">✓</div><div><div class="feat-name">Kalkulator ongkos kirim</div><div class="feat-sub">Integrasi API Raja Ongkir</div></div></div>
+      </div>
+    </div>
+    <div class="card-dark">
+      <div class="card-label" style="color:var(--gold)">Fitur unggulan (fase 2)</div>
+      <div class="feat-list" style="margin-top:14px">
+        <div class="feat-item" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)"><div class="feat-check" style="background:rgba(200,136,42,.15);color:var(--gold2)">★</div><div><div class="feat-name" style="color:var(--white)">Panduan packing frozen otomatis</div><div class="feat-sub" style="color:rgba(255,255,255,.4)">Seller dapat panduan packing sesuai tujuan kota</div></div></div>
+        <div class="feat-item" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)"><div class="feat-check" style="background:rgba(200,136,42,.15);color:var(--gold2)">★</div><div><div class="feat-name" style="color:var(--white)">Fitur "Titip Belikan"</div><div class="feat-sub" style="color:rgba(255,255,255,.4)">Perantau bisa titip ke sesama yang mudik</div></div></div>
+        <div class="feat-item" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)"><div class="feat-check" style="background:rgba(200,136,42,.15);color:var(--gold2)">★</div><div><div class="feat-name" style="color:var(--white)">Flash sale Lebaran & Maulid</div><div class="feat-sub" style="color:rgba(255,255,255,.4)">Kampanye seasonal otomatis</div></div></div>
+        <div class="feat-item" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)"><div class="feat-check" style="background:rgba(200,136,42,.15);color:var(--gold2)">★</div><div><div class="feat-name" style="color:var(--white)">Review dengan foto & video</div><div class="feat-sub" style="color:rgba(255,255,255,.4)">Social proof otentik dari pembeli nyata</div></div></div>
+        <div class="feat-item" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)"><div class="feat-check" style="background:rgba(200,136,42,.15);color:var(--gold2)">★</div><div><div class="feat-name" style="color:var(--white)">Langganan bulanan produk favorit</div><div class="feat-sub" style="color:rgba(255,255,255,.4)">Rendang 2kg tiap bulan otomatis dikirim</div></div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 3: REKRUT SELLER
+══════════════════════════════════════════ -->
+<div class="page" id="page-seller">
+<div class="sec">
+<div class="sec-inner">
+  <div class="sec-header">
+    <div class="sec-num">03 — REKRUT SELLER</div>
+    <div class="sec-title">Cara dapat <em>50 seller</em> pertama dalam 1 bulan</div>
+    <p class="sec-desc">Marketplace tanpa seller adalah halaman kosong. Ini strategi sistematis untuk mengisi katalog dengan cepat sebelum launch.</p>
+  </div>
+
+  <div class="g3" style="margin-bottom:24px">
+    <div class="card-gold">
+      <div style="font-size:28px;margin-bottom:10px">🗺️</div>
+      <div class="card-label" style="color:rgba(13,10,6,.5)">Minggu 1–2</div>
+      <div class="card-title">Door-to-door digital</div>
+      <div class="card-text" style="color:rgba(13,10,6,.7)">Hubungi langsung via WhatsApp semua toko oleh-oleh, produsen rendang, dan UMKM Sumbar yang sudah ada di Shopee/IG.</div>
+    </div>
+    <div class="card">
+      <div style="font-size:28px;margin-bottom:10px">🤝</div>
+      <div class="card-label">Minggu 2–3</div>
+      <div class="card-title">Kemitraan organisasi</div>
+      <div class="card-text">Masuk ke Dekranasda Sumbar, Dinas Koperasi, dan UMKM Center Padang — minta mereka bantu sosialisasi ke anggota mereka.</div>
+    </div>
+    <div class="card-sand">
+      <div style="font-size:28px;margin-bottom:10px">📣</div>
+      <div class="card-label">Minggu 3–4</div>
+      <div class="card-title">Referral seller</div>
+      <div class="card-text">Seller yang sudah bergabung dapat bonus jika rekrut seller baru. Sistem referral sederhana via kode unik di WhatsApp.</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-label">Target seller berdasarkan kategori produk</div>
+    <table class="tbl" style="margin-top:14px">
+      <tr><th>Kategori</th><th>Target seller</th><th>Lokasi utama</th><th>Rata-rata harga</th></tr>
+      <tr>
+        <td><b>Rendang & lauk pauk</b></td>
+        <td>15 seller</td>
+        <td>Padang, Payakumbuh, Bukittinggi</td>
+        <td class="price">Rp 50rb–200rb</td>
+      </tr>
+      <tr>
+        <td><b>Keripik & camilan</b></td>
+        <td>10 seller</td>
+        <td>Bukittinggi, Padang Panjang</td>
+        <td class="price">Rp 25rb–80rb</td>
+      </tr>
+      <tr>
+        <td><b>Kopi Sumbar</b></td>
+        <td>8 seller</td>
+        <td>Solok, Agam, Tanah Datar</td>
+        <td class="price">Rp 50rb–150rb</td>
+      </tr>
+      <tr>
+        <td><b>Kain & kerajinan</b></td>
+        <td>7 seller</td>
+        <td>Silungkang, Pandai Sikek, Koto Gadang</td>
+        <td class="price">Rp 150rb–2jt</td>
+      </tr>
+      <tr>
+        <td><b>Makanan olahan lain</b></td>
+        <td>10 seller</td>
+        <td>Seluruh Sumbar</td>
+        <td class="price">Rp 30rb–120rb</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="g2" style="margin-bottom:24px">
+    <div>
+      <div class="wa-box">
+        <p class="wa-text">Assalamualaikum <span class="wa-var">[Nama Seller]</span> 🙏</p><br>
+        <p class="wa-text">Saya <span class="wa-var">[Nama Anda]</span> dari <b>RantauMart</b> — marketplace khusus produk asli Sumatera Barat yang kami bangun untuk jutaan perantau Minang di seluruh Indonesia.</p><br>
+        <p class="wa-text">Saya melihat produk <span class="wa-var">[nama produk]</span> Anda di <span class="wa-var">[Shopee/IG]</span> — kualitasnya bagus dan saya yakin banyak perantau Minang yang akan suka!</p><br>
+        <p class="wa-text">Kami undang <span class="wa-var">[nama toko]</span> untuk jadi <b>Seller Perdana</b> RantauMart dengan benefit eksklusif:</p><br>
+        <p class="wa-text">✅ <b>Gratis komisi 3 bulan pertama</b><br>
+        ✅ Tampil di halaman utama saat launch<br>
+        ✅ Dibantu setup toko & foto produk<br>
+        ✅ Diikutkan promosi ke 10.000+ perantau</p><br>
+        <p class="wa-text">Tertarik? Saya bisa bantu proses daftar dalam 10 menit saja 😊<br>Kapan ada waktu untuk ngobrol singkat?</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="card-gold">
+        <div style="font-size:13px;font-weight:700;margin-bottom:8px">Insentif Seller Perdana (50 pertama)</div>
+        <div class="checklist" style="gap:6px">
+          <div class="cl-item" style="color:var(--ink2)">Komisi 0% selama 3 bulan pertama</div>
+          <div class="cl-item" style="color:var(--ink2)">Halaman toko di-feature di beranda</div>
+          <div class="cl-item" style="color:var(--ink2)">Dibantu foto produk gratis (seller Padang)</div>
+          <div class="cl-item" style="color:var(--ink2)">Diikutkan email blast ke subscriber</div>
+          <div class="cl-item" style="color:var(--ink2)">Badge "Seller Pendiri" eksklusif</div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:8px">Proses onboarding seller</div>
+        <div class="checklist">
+          <div class="cl-item">Isi form pendaftaran online (10 menit)</div>
+          <div class="cl-item">Upload KTP + foto produk minimal 3</div>
+          <div class="cl-item">Verifikasi admin dalam 24 jam</div>
+          <div class="cl-item">Setup toko & upload produk dibantu admin</div>
+          <div class="cl-item">Toko live & siap terima pesanan</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Di mana menemukan calon seller</div>
+    <div class="g3" style="margin-top:16px">
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:8px">🔍 Online (gratis)</div>
+        <div class="checklist">
+          <div class="cl-item">Cari "rendang padang" di Shopee/Tokopedia, DM seller yang masih kecil</div>
+          <div class="cl-item">Scrape akun Instagram dengan hashtag #rencanganpadang #keripikbalado</div>
+          <div class="cl-item">Google Maps "oleh-oleh padang" → hubungi semua yang muncul</div>
+          <div class="cl-item">Grup Facebook UMKM Sumbar & Padang Jualan</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:8px">🏢 Institusi</div>
+        <div class="checklist">
+          <div class="cl-item">Dekranasda Sumatera Barat — database UMKM kerajinan</div>
+          <div class="cl-item">Dinas Koperasi & UMKM Kota Padang</div>
+          <div class="cl-item">UMKM Center Pasar Raya Padang</div>
+          <div class="cl-item">Rumah BUMN Padang — program digital UMKM</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:8px">📍 Offline (survei langsung)</div>
+        <div class="checklist">
+          <div class="cl-item">Kunjungi Jl. Perintis Kemerdekaan Bukittinggi (pusat oleh-oleh)</div>
+          <div class="cl-item">Pasar Atas & Pasar Bawah Bukittinggi</div>
+          <div class="cl-item">Kawasan toko oleh-oleh Padang Panjang</div>
+          <div class="cl-item">Sentra tenun Silungkang, Sawahlunto</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 4: PROMOSI KE PERANTAU
+══════════════════════════════════════════ -->
+<div class="page" id="page-promosi">
+<div class="sec">
+<div class="sec-inner">
+  <div class="sec-header">
+    <div class="sec-num">04 — STRATEGI PROMOSI</div>
+    <div class="sec-title">Jangkau <em>perantau Minang</em> di mana mereka berada</div>
+    <p class="sec-desc">Strategi promosi berlapis — dari konten viral TikTok hingga masuk ke grup WhatsApp perantau yang tersebar di 34 provinsi.</p>
+  </div>
+
+  <div class="g2" style="margin-bottom:24px">
+    <div class="card-dark">
+      <div class="card-icon ci-gold" style="background:rgba(200,136,42,.15)">🎵</div>
+      <div class="card-label" style="color:var(--gold)">Channel #1 · Paling viral</div>
+      <div class="card-title-white">TikTok & Reels</div>
+      <div class="card-text-white" style="margin-bottom:14px">Konten emotional — "Rendang Bu X sekarang bisa sampai ke Jakarta dalam 2 hari" atau "Perantau Minang di Kalimantan akhirnya bisa makan lamang tapai lagi."</div>
+      <div class="checklist" style="gap:6px">
+        <div class="cl-item" style="color:rgba(255,255,255,.6)">Video unboxing rendang frozen ke perantau di luar Sumbar</div>
+        <div class="cl-item" style="color:rgba(255,255,255,.6)">Konten "behind the scene" dapur UMKM Sumbar</div>
+        <div class="cl-item" style="color:rgba(255,255,255,.6)">Kolaborasi dengan food blogger & travel creator Sumbar</div>
+        <div class="cl-item" style="color:rgba(255,255,255,.6)">Hashtag: #RantauMart #OlehOlehMinang #PerantauMinang</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon ci-gold">💬</div>
+      <div class="card-label">Channel #2 · Paling efektif</div>
+      <div class="card-title">Komunitas perantau WhatsApp</div>
+      <div class="card-text" style="margin-bottom:14px">Minta izin admin grup perantau di Jabodetabek, Batam, Pekanbaru, dan kota besar lain untuk share info RantauMart. Tawarkan diskon 10% khusus anggota grup.</div>
+      <div class="checklist">
+        <div class="cl-item">Target: 100+ grup WA perantau Minang di seluruh RI</div>
+        <div class="cl-item">Pesan promosi singkat + link produk terlaris</div>
+        <div class="cl-item">Kode promo unik per grup → bisa tracking mana grup paling aktif</div>
+        <div class="cl-item">Admin grup dapat komisi 2% dari transaksi anggotanya</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3" style="margin-bottom:24px">
+    <div class="card-sand">
+      <div style="font-size:22px;margin-bottom:10px">🎓</div>
+      <div class="card-label">Channel #3</div>
+      <div class="card-title">Kampus & mahasiswa rantau</div>
+      <div class="card-text">Mahasiswa Sumbar di Bandung, Jogja, Surabaya adalah pangsa pasar utama. Masuk ke Ikatan Mahasiswa Minang (IMAMI) di tiap kota besar.</div>
+    </div>
+    <div class="card">
+      <div style="font-size:22px;margin-bottom:10px">📰</div>
+      <div class="card-label">Channel #4</div>
+      <div class="card-title">Media lokal Sumbar</div>
+      <div class="card-text">Kirim press release ke Padang Ekspres, Haluan, dan media online Sumbar. Cerita "startup lokal bantu UMKM Sumbar go digital" mudah diliput.</div>
+    </div>
+    <div class="card-dark">
+      <div style="font-size:22px;margin-bottom:10px">🎪</div>
+      <div class="card-label" style="color:var(--gold)">Channel #5</div>
+      <div class="card-title-white">Festival & event Minang</div>
+      <div class="card-text-white">Hadir di Festival Minang Jakarta, Pekan Raya Padang, dan acara reunian perantau sebagai sponsor atau booth — langsung temu muka dengan target market.</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-label">Kampanye seasonal — kalender promosi setahun</div>
+    <table class="tbl" style="margin-top:14px">
+      <tr><th>Momen</th><th>Kampanye</th><th>Produk unggulan</th><th>Estimasi boost</th></tr>
+      <tr><td><span class="badge b-gold">Lebaran</span></td><td><b>"Kirim Rasa Kampung ke Seluruh Indonesia"</b> — paket hamper rendang + keripik</td><td>Rendang, lamang tapai, kue Lebaran</td><td style="color:var(--green);font-weight:700">+300%</td></tr>
+      <tr><td><span class="badge b-dark">Maulid Nabi</span></td><td>Promosi makanan tradisional Minang & diskon 20% produk kuliner</td><td>Gulai, sate Padang, kue tradisional</td><td style="color:var(--green);font-weight:700">+150%</td></tr>
+      <tr><td><span class="badge b-red">Hari Minang</span></td><td>Flash sale 24 jam produk kerajinan & tenun lokal</td><td>Tenun, songket, aksesori Minang</td><td style="color:var(--green);font-weight:700">+200%</td></tr>
+      <tr><td><span class="badge b-green">Tahun Baru</span></td><td>Paket hadiah "Rasa Kampung untuk Keluarga" dikirim ke seluruh RI</td><td>Rendang frozen, kopi, keripik</td><td style="color:var(--green);font-weight:700">+180%</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Template pesan promosi ke grup WA perantau</div>
+    <div class="wa-box" style="margin-top:16px">
+      <p class="wa-text">*🏔️ Halo keluarga perantau Minang!*</p><br>
+      <p class="wa-text">Ada kabar gembira nih — sekarang rendang, keripik balado, dan kopi Solok asli Sumbar bisa langsung dikirim ke pintu rumah Anda, di mana pun di Indonesia! 🎉</p><br>
+      <p class="wa-text">Kenalkan *RantauMart* — marketplace pertama khusus produk asli Sumatera Barat. Semua seller sudah diverifikasi langsung dari sumber di Sumbar.</p><br>
+      <p class="wa-text">🎁 Khusus untuk kita semua di grup ini:<br>
+      *Kode promo: <span class="wa-var">RANTAU10</span>*<br>
+      Diskon 10% untuk pembelian pertama!</p><br>
+      <p class="wa-text">👉 Belanja sekarang: <span class="wa-var">rantaumart.id</span></p><br>
+      <p class="wa-text">Ayo kita dukung UMKM kampung halaman kita bersama 🙏❤️</p>
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 5: KEUANGAN
+══════════════════════════════════════════ -->
+<div class="page" id="page-keuangan">
+<div class="sec">
+<div class="sec-inner">
+  <div class="sec-header">
+    <div class="sec-num">05 — PROYEKSI KEUANGAN</div>
+    <div class="sec-title">Modal, <em>BEP</em>, dan proyeksi 12 bulan</div>
+    <p class="sec-desc">Asumsi konservatif — semua angka dihitung dengan skenario pertumbuhan moderat. Angka nyata bisa lebih tinggi.</p>
+  </div>
+
+  <div class="g2" style="margin-bottom:24px">
+    <div class="card">
+      <div class="card-label">Modal awal yang dibutuhkan</div>
+      <table class="tbl" style="margin-top:14px">
+        <tr><th>Kebutuhan</th><th>Estimasi biaya</th></tr>
+        <tr><td>Domain + hosting (1 tahun)</td><td class="price">Rp 500rb</td></tr>
+        <tr><td>Pengembangan website MVP (freelancer / no-code)</td><td class="price">Rp 3–8jt</td></tr>
+        <tr><td>Biaya payment gateway (setup)</td><td class="price">Rp 0 (gratis)</td></tr>
+        <tr><td>Logo & desain branding</td><td class="price">Rp 300rb–1jt</td></tr>
+        <tr><td>Iklan awal (Meta & TikTok Ads)</td><td class="price">Rp 1–3jt</td></tr>
+        <tr><td>Operasional 3 bulan pertama</td><td class="price">Rp 1–2jt</td></tr>
+        <tr style="background:var(--sand)"><td><b>Total modal minimal</b></td><td class="price"><b>Rp 6–15jt</b></td></tr>
+      </table>
+      <div style="margin-top:12px;font-size:12px;color:var(--warm);font-style:italic">* Bisa lebih hemat jika pakai template website siap pakai (Shopify, WooCommerce, atau Sirclo)</div>
+    </div>
+    <div class="card-dark">
+      <div class="card-label" style="color:var(--gold)">Proyeksi pendapatan bulan ke-1 sampai 12</div>
+      <div style="margin-top:16px">
+        <div class="rev-row">
+          <div class="rev-header"><span style="color:rgba(255,255,255,.6)">Bulan 1–2 (pra-launch)</span><span style="color:var(--gold2)">Rp 0</span></div>
+          <div class="rev-bar" style="background:rgba(255,255,255,.08)"><div class="rev-fill" style="width:0%;background:var(--gold)"></div></div>
+        </div>
+        <div class="rev-row">
+          <div class="rev-header"><span style="color:rgba(255,255,255,.6)">Bulan 3 (launch)</span><span style="color:var(--gold2)">Rp 1–3jt</span></div>
+          <div class="rev-bar" style="background:rgba(255,255,255,.08)"><div class="rev-fill" style="width:8%;background:var(--gold)"></div></div>
+        </div>
+        <div class="rev-row">
+          <div class="rev-header"><span style="color:rgba(255,255,255,.6)">Bulan 4–5</span><span style="color:var(--gold2)">Rp 5–10jt</span></div>
+          <div class="rev-bar" style="background:rgba(255,255,255,.08)"><div class="rev-fill" style="width:25%;background:var(--gold)"></div></div>
+        </div>
+        <div class="rev-row">
+          <div class="rev-header"><span style="color:rgba(255,255,255,.6)">Bulan 6 (BEP target)</span><span style="color:var(--gold2)">Rp 15–25jt</span></div>
+          <div class="rev-bar" style="background:rgba(255,255,255,.08)"><div class="rev-fill" style="width:45%;background:var(--gold)"></div></div>
+        </div>
+        <div class="rev-row">
+          <div class="rev-header"><span style="color:rgba(255,255,255,.6)">Bulan 9</span><span style="color:var(--gold2)">Rp 40–70jt</span></div>
+          <div class="rev-bar" style="background:rgba(255,255,255,.08)"><div class="rev-fill" style="width:65%;background:var(--gold)"></div></div>
+        </div>
+        <div class="rev-row">
+          <div class="rev-header"><span style="color:rgba(255,255,255,.6)">Bulan 12</span><span style="color:var(--gold2)">Rp 80–150jt</span></div>
+          <div class="rev-bar" style="background:rgba(255,255,255,.08)"><div class="rev-fill" style="width:100%;background:var(--gold)"></div></div>
+        </div>
+        <div style="margin-top:20px;padding:14px;background:rgba(200,136,42,.1);border-radius:10px;border:1px solid rgba(200,136,42,.2)">
+          <div style="font-size:11px;color:var(--gold);font-weight:700;margin-bottom:4px">ASUMSI PROYEKSI BULAN 12</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.7">100 seller aktif · GMV Rp 600jt–1M/bln · Komisi rata-rata 10% · 20 seller premium Rp 150rb/bln</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-item"><div class="stat-num">Rp 6jt</div><div class="stat-label">Modal minimum untuk mulai MVP</div></div>
+    <div class="stat-item"><div class="stat-num">Bln 6</div><div class="stat-label">Target break-even point (BEP)</div></div>
+    <div class="stat-item"><div class="stat-num">10%</div><div class="stat-label">Komisi rata-rata per transaksi</div></div>
+    <div class="stat-item"><div class="stat-num">100+</div><div class="stat-label">Target seller aktif di bulan ke-12</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Skenario GMV vs pendapatan platform (bulan 12)</div>
+    <table class="tbl" style="margin-top:14px">
+      <tr><th>Skenario</th><th>GMV/bulan</th><th>Komisi (10%)</th><th>Seller premium (20 seller)</th><th>Total pendapatan</th></tr>
+      <tr><td><span class="badge b-red">Konservatif</span></td><td>Rp 300jt</td><td>Rp 30jt</td><td>Rp 3jt</td><td class="price">Rp 33jt/bln</td></tr>
+      <tr><td><span class="badge b-gold">Moderat</span></td><td>Rp 700jt</td><td>Rp 70jt</td><td>Rp 6jt</td><td class="price">Rp 76jt/bln</td></tr>
+      <tr><td><span class="badge b-green">Optimis</span></td><td>Rp 1,5M</td><td>Rp 150jt</td><td>Rp 15jt</td><td class="price">Rp 165jt/bln</td></tr>
+    </table>
+  </div>
+
+</div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 6: ROADMAP
+══════════════════════════════════════════ -->
+<div class="page" id="page-roadmap">
+<div class="sec">
+<div class="sec-inner">
+  <div class="sec-header">
+    <div class="sec-num">06 — ROADMAP</div>
+    <div class="sec-title">Timeline <em>12 bulan</em> dari nol sampai cuan</div>
+    <p class="sec-desc">Rencana eksekusi realistis — dibagi per fase dengan target yang terukur di setiap checkpoint.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">1</div>
+      <div class="tl-content">
+        <div class="tl-week">Bulan 1 — Fondasi</div>
+        <div class="tl-title">Riset, branding, dan bangun MVP</div>
+        <div class="tl-text">Riset kompetitor, tentukan nama & domain, bangun MVP website (bisa pakai Shopify/WooCommerce dulu), buat konten TikTok perdana, mulai hubungi 20 calon seller pertama via WhatsApp.</div>
+        <div class="tl-chips">
+          <span class="tl-chip">Domain & hosting</span>
+          <span class="tl-chip">Branding selesai</span>
+          <span class="tl-chip">20 calon seller dikontrak</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">2</div>
+      <div class="tl-content">
+        <div class="tl-week">Bulan 2 — Pre-launch</div>
+        <div class="tl-title">Onboarding seller & uji coba transaksi</div>
+        <div class="tl-text">Onboarding 30–50 seller, upload 200+ produk, uji coba pembayaran & pengiriman, perbaiki bug, buat landing page pre-launch dengan email capture, jalankan konten TikTok rutin setiap hari.</div>
+        <div class="tl-chips">
+          <span class="tl-chip">50 seller onboard</span>
+          <span class="tl-chip">200+ produk live</span>
+          <span class="tl-chip">500 email subscriber</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">3</div>
+      <div class="tl-content">
+        <div class="tl-week">Bulan 3 — Launch! 🚀</div>
+        <div class="tl-title">Grand opening & kampanye promosi pertama</div>
+        <div class="tl-text">Launch resmi dengan promo diskon 15% untuk 500 pembeli pertama. Masuk ke 50 grup WA perantau. Iklan Meta & TikTok Ads budget Rp 1jt. Press release ke media lokal Sumbar.</div>
+        <div class="tl-chips">
+          <span class="tl-chip">500 pembeli pertama</span>
+          <span class="tl-chip">GMV Rp 50jt</span>
+          <span class="tl-chip">Media coverage 3+</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">4</div>
+      <div class="tl-content">
+        <div class="tl-week">Bulan 4–6 — Tumbuh</div>
+        <div class="tl-title">Optimasi, repeat buyer, dan seller premium</div>
+        <div class="tl-text">Fokus retensi pembeli (program loyalitas, newsletter), luncurkan paket seller premium, optimalkan SEO untuk kata kunci "oleh-oleh Sumbar", jalankan kampanye Lebaran/Maulid jika momennya tepat.</div>
+        <div class="tl-chips">
+          <span class="tl-chip">BEP tercapai</span>
+          <span class="tl-chip">20 seller premium</span>
+          <span class="tl-chip">GMV Rp 200jt/bln</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">5</div>
+      <div class="tl-content">
+        <div class="tl-week">Bulan 7–9 — Skala</div>
+        <div class="tl-title">Ekspansi kategori & fitur lanjutan</div>
+        <div class="tl-text">Tambah kategori produk (fashion, craft), luncurkan fitur "Titip Belikan", rekrut tim kecil (1 developer, 1 marketing), jajaki kemitraan dengan maskapai atau jasa pengiriman frozen khusus.</div>
+        <div class="tl-chips">
+          <span class="tl-chip">100 seller aktif</span>
+          <span class="tl-chip">5.000 pembeli terdaftar</span>
+          <span class="tl-chip">Tim 3 orang</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">6</div>
+      <div class="tl-content">
+        <div class="tl-week">Bulan 10–12 — Dominasi</div>
+        <div class="tl-title">Cari pendanaan & ekspansi nasional</div>
+        <div class="tl-text">Siapkan pitch deck untuk investor angel/UMKM fund, daftar ke program akselerator (Startup Studio Indonesia, Bekraf), mulai iklan nasional, dan targetkan ekspansi ke marketplace produk daerah lain di Indonesia.</div>
+        <div class="tl-chips">
+          <span class="tl-chip">GMV Rp 500jt+/bln</span>
+          <span class="tl-chip">Pitch 3+ investor</span>
+          <span class="tl-chip">Pendapatan Rp 50jt+/bln</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-dark" style="margin-top:32px">
+    <div class="card-label" style="color:var(--gold)">Langkah pertama yang harus dilakukan besok pagi</div>
+    <div class="g2" style="margin-top:16px">
+      <div class="checklist">
+        <div class="cl-item" style="color:rgba(255,255,255,.7)">Cek ketersediaan domain rantaumart.id atau namaanda.id</div>
+        <div class="cl-item" style="color:rgba(255,255,255,.7)">Buat akun TikTok bisnis dan posting konten pertama hari ini</div>
+        <div class="cl-item" style="color:rgba(255,255,255,.7)">Hubungi 5 UMKM rendang via WhatsApp hari ini — gunakan template di halaman Rekrut Seller</div>
+        <div class="cl-item" style="color:rgba(255,255,255,.7)">Buat grup WhatsApp "Tim RantauMart" — ajak 1–2 teman bantu</div>
+      </div>
+      <div class="checklist">
+        <div class="cl-item" style="color:rgba(255,255,255,.7)">Daftar akun Midtrans atau Xendit (gratis, proses 1 hari)</div>
+        <div class="cl-item" style="color:rgba(255,255,255,.7)">Buka akun Shopify trial gratis selama 3 bulan untuk uji MVP</div>
+        <div class="cl-item" style="color:rgba(255,255,255,.7)">Bergabung ke 10 grup WA perantau Minang di kota besar</div>
+        <div class="cl-item" style="color:rgba(255,255,255,.7)">Baca laporan e-commerce UMKM Indonesia 2024 dari Katadata</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  const tabs = ['cover','model','struktur','seller','promosi','keuangan','roadmap'];
+  const idx = tabs.indexOf(id);
+  document.querySelectorAll('.nav-tab')[idx]?.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
